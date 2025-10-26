@@ -45,7 +45,8 @@ USER_AGENTS = [
     "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0 Safari/537.36",
     "OrendaCrawler/1.0 (+https://example.com/orenda)",
 ]
-PLATFORM_LINK= os.getenv("PLATFORM_LINK")
+
+COMPETITORS_LINK= os.getenv("COMPETITORS_LINK")
 
 OUTPUT_DIR = os.getenv("OUTPUT_DIR", "outputs")
 DEFAULT_MAX_PAGES = int(os.getenv("DEFAULT_MAX_PAGES", 30))
@@ -425,7 +426,7 @@ def parse_args():
 
 def prompt_for_urls():
     print("Paste one or more URLs separated by space or commas, then press Enter:")
-    txt = PLATFORM_LINK.strip()
+    txt = input("> ").strip()
     if not txt:
         return []
     parts = re.split(r"[\s,]+", txt)

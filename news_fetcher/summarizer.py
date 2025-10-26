@@ -1,55 +1,108 @@
-# summarize translated html/text for strategic social listening.
-# returns structured result:
-# - paragraph_summary: short technical paragraph
-# - bullet_points: key technical/strategic points
-# - top_actions: 3 prioritized recommended actions
-# - signals_to_watch: short list of signals or keywords to monitor
+#messed up, needs debugging
 
-import openai
-from src.utils import get_env_var
+import requests
+from utils import get_env_var
 from bs4 import BeautifulSoup
+import logging
 
-openai.api_key = get_env_var("OPENAI_API_KEY", "")
-SUMMARIZER_MODEL = get_env_var("OPENAI_SUMMARIZER_MODEL")
+logger = logging.getLogger(__name__)
 
-def _strip_html_to_text(html):
-    return BeautifulSoup(html, "html.parser").get_text(separator="\n")
+#https://rapidapi.com/restyler/api/article-extractor-and-summarizer/playground/apiendpoint_99e4b95c-3adc-4532-8b4e-20795c3c996a
+CHAT_API_KEY = get_env_var("OPENAI_API_KEY_SUMMARIZE")
+CHAT_API_HOST = get_env_var("OPENAI_API_HOST_SUMMARIZE")
+CHAT_MODEL_URL = get_env_var("OPENAI_API_URL_SUMMARIZE")
+TRANSLATOR_API_HOST= get_env_var("TRANSLATOR_API_HOST")
+TRANSLATOR_API_KEY = get_env_var("TRANSLATOR_API_KEY")
+TRANSLATE_BASE_URL=get_env_var("TRANSLATE_BASE_URL")
+
+HEADERS_SUMMERIZE = {
+    "x-rapidapi-host": CHAT_API_HOST,
+    "x-rapidapi-key": CHAT_API_KEY,
+    "Content-Type": "application/json"
+}
+HEADERS_TRANSLATE = {
+    "x-rapidapi-host": TRANSLATOR_API_HOST,
+    "x-rapidapi-key": TRANSLATOR_API_KEY,
+    "Content-Type": "application/json"
+}
+
+def detect_language(text):
+    """
+    Auto-detect language using RapidAPI (Google Translate).
+    """
+    try:
+        url = f"{TRANSLATE_BASE_URL}/detect"
+        payload = {"q": text[:300]}  # shorter snippet
+        response = requests.post(url, data=payload, headers=HEADERS_TRANSLATE, timeout=15)
+        response.raise_for_status()
+        detections = response.json().get("data", {}).get("detections", [])
+        if detections and detections[0]:
+            return detections[0][0].get("language", "en")
+    except Exception:
+        pass
+    return "en"
+
+
+def translate_to_en_html(text_html, source_lang=None):
+    """
+    Translate any HTML/text content to English using RapidAPI.
+    """
+    if not text_html:
+        return ""
+
+    if not source_lang or source_lang.lower().startswith("auto"):
+        source_lang = detect_language(text_html)
+
+    if source_lang.lower().startswith("en"):
+        return text_html
+
+    try:
+        payload = {
+            "q": text_html,
+            "source": source_lang,
+            "target": "en",
+            "format": "html"
+        }
+        response = requests.post(TRANSLATE_BASE_URL, data=payload, headers=HEADERS_TRANSLATE, timeout=30)
+        response.raise_for_status()
+        return response.json().get("data", {}).get("translations", [{}])[0].get("translatedText", text_html)
+    except Exception:
+        return text_html
+
 
 def summarize_article(html_or_text, domain, niche):
-    # prepare text: we prefer text for LLM but keep html content to preserve headings for context
-    text = _strip_html_to_text(html_or_text) if "<" in (html_or_text or "") else (html_or_text or "")
-    short_text_for_prompt = text[:6000]  # avoid too long prompts
+    # Generate structured summary.
+
+    text = BeautifulSoup(html_or_text, "html.parser").get_text(separator="\n") if "<" in (html_or_text or "") else (html_or_text or "")
+    short_text_for_prompt = text[:6000]
 
     prompt = f"""
-        you are a competitive intelligence analyst focused on strategic social listening (veille stratégique, concurrentielle, et technologique).
-        given the article below (translated to english), produce a structured summary tailored for a strategic intelligence officer in marketing/sales/rd:
-        - a short technical paragraph (2-3 sentences) using precise technical terms where relevant.
-        - 5 concise bullet points highlighting technical facts, product names, dates, organizations, quantitative numbers, extracted from the article.
-        - top 3 prioritized actions (very short) that a marketing/sales/strategy team should consider based on this article.
-        - 3 signals to keep monitoring (keywords or behaviors), if available.
-        also include any notable quotations or claims and flag them as "claim: ...".
-        output as json with keys: paragraph_summary, bullet_points (list), top_actions (list), signals_to_watch (list), notable_claims (list)
+    You are a competitive intelligence analyst. Given the article below (translated to English), produce a structured summary:
+    - paragraph_summary: 2-5 technical sentences
+    - bullet_points: 5 key points (technical facts, strategic insights, new products, upcoming events or partnerships, numbers, organizations)
+    - top_actions: 3 recommended actions for marketing/sales/strategy/technical expertise
+    - signals_to_watch: 3 signals or smart keywords to monitor
+    - notable_claims: any notable claims or quotes
 
-        domain: {domain}
-        niche: {niche}
+    Output as JSON with keys: paragraph_summary, bullet_points, top_actions, signals_to_watch, notable_claims
 
-        article text:
-        \"\"\"{short_text_for_prompt}\"\"\""""
+    Domain: {domain}
+    Niche: {niche}
+
+    Article text:
+    \"\"\"{short_text_for_prompt}\"\"\"
+    """
+
     try:
-        resp = openai.ChatCompletion.create(
-            model=SUMMARIZER_MODEL,
-            messages=[{"role":"user","content":prompt}],
-            temperature=0.0,
-            max_tokens=600
-        )
-        raw = resp.choices[0].message.content
-        # try to parse json returned by model
+        payload = {"prompt": prompt, "max_tokens": 650, "temperature": 0.1}
+        r = requests.post(CHAT_MODEL_URL, json=payload, headers=HEADERS_SUMMERIZE, timeout=30)
+        r.raise_for_status()
+        raw = r.json().get("result", "")
         import json
         parsed = {}
         try:
             parsed = json.loads(raw)
         except Exception:
-            # if the model returned plain text, try to extract sections heuristically
             parsed = {
                 "paragraph_summary": raw.split("\n\n")[0] if raw else "",
                 "bullet_points": [],
@@ -58,9 +111,9 @@ def summarize_article(html_or_text, domain, niche):
                 "notable_claims": []
             }
         return parsed
-    except Exception:
-        # fallback: naive short summary + empty structured lists
-        first_sentences = (text.split(".")[:2])
+    except Exception as e:
+        logger.warning("Summarizer model failed: %s", e)
+        first_sentences = text.split(".")[:2]
         return {
             "paragraph_summary": ". ".join(first_sentences).strip(),
             "bullet_points": [],

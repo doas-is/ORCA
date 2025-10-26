@@ -1,43 +1,49 @@
-# helper functions for env, json handling, timestamps, small text helpers
 import os
-import json
-from dotenv import load_dotenv
-from datetime import datetime
-from urllib.parse import urlparse
+import re
+import unicodedata
 
-load_dotenv()
+def get_env_var(name: str, default=None):
+    # Retrieve an environment variable safely.
+    value = os.getenv(name)
+    if value is None or value.strip() == "":
+        return default
+    return value.strip()
 
-def get_env_var(name, default=None):
-    return os.getenv(name, default)
 
-def load_json(file_path):
-    if not os.path.exists(file_path):
-        return {}
-    with open(file_path, "r", encoding="utf-8") as f:
-        return json.load(f)
+def normalize_url(url: str):
+    """
+    Normalize a URL by stripping tracking params and standardizing structure.
+    """
+    if not url:
+        return url
+    url = url.strip()
+    url = re.sub(r"utm_[^&]+&?", "", url)
+    url = url.replace("?&", "?").rstrip("?&")
+    return url
 
-def save_json(data, file_path):
-    os.makedirs(os.path.dirname(file_path), exist_ok=True)
-    with open(file_path, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=4, ensure_ascii=False)
 
-def current_timestamp():
-    return datetime.utcnow().isoformat()
+def safe_truncate(text: str, max_length: int):
+    """
+    Truncate a long string safely without cutting in the middle of words.
+    """
+    if not text:
+        return text
+    if len(text) <= max_length:
+        return text
+    truncated = text[:max_length]
+    # Cut nicely at last punctuation or space
+    cutoff = max(truncated.rfind("."), truncated.rfind(" "), truncated.rfind("!"), truncated.rfind("?"))
+    if cutoff > 0:
+        truncated = truncated[:cutoff + 1]
+    return truncated + " [...]"
 
-def normalize_url(url):
-    # small helper to canonicalize url for dedup
-    try:
-        parsed = urlparse(url)
-        scheme = parsed.scheme or "https"
-        netloc = parsed.netloc.lower()
-        path = parsed.path.rstrip("/")
-        if not path:
-            path = "/"
-        return f"{scheme}://{netloc}{path}"
-    except:
-        return url # note : we ain't implementing dedup for now 
 
-def safe_truncate(text, length=1000):
+def clean_text(text: str):
+    """
+    Normalize text: remove extra whitespace, invisible chars, normalize Unicode.
+    """
     if not text:
         return ""
-    return text if len(text) <= length else text[:length] + "..."
+    text = unicodedata.normalize("NFKC", text)
+    text = re.sub(r"\s+", " ", text)
+    return text.strip()
