@@ -1,140 +1,184 @@
-# generate high-quality news search queries using few-shot prompts,
-# then score + improve them if needed using a second model.
-# all prompts and examples are inside the function so the model gets context.
-
-
-# pip install openai
-# pip install anthropic
-import openai
-from anthropic import Anthropic
 import os
-from src.utils import get_env_var
+import json
+import time
+import logging
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from typing import List, Dict, Any
+import requests
+from utils import getenv
 
-openai.api_key = get_env_var("OPENAI_API_KEY", "")
+logger = logging.getLogger(__name__)
 
-# model names taken from .env so you can switch easily
-QUERY_MODEL = get_env_var("OPENAI_QUERY_MODEL")
-SCORER_MODEL = get_env_var("OPENAI_SCORER_MODEL")
-PROMPT_MIN_SCORE = int(get_env_var("PROMPT_MIN_SCORE"))
+RAPIDAPI_KEY = os.getenv("CHAT_API_KEY")
+RAPIDAPI_HOST = os.getenv("CHAT_API_HOST")
+MODEL_URL = os.getenv("CHAT_MODEL_URL")
 
-def _build_few_shot_prompt(domain, niche, num=8):
-    example_input = {
-        "domain": "renewable energy",
-        "niche": "solar policy in north africa"
+PROMPT_MIN_SCORE = int(os.getenv("PROMPT_MIN_SCORE"))
+num_queries=os.getenv("NUM_QUERIES")
+
+
+def query_model(prompt, temperature=0.2, max_tokens=100) -> str:
+    headers = {
+        "x-rapidapi-host": RAPIDAPI_HOST,
+        "x-rapidapi-key": RAPIDAPI_KEY,
+        "Content-Type": "application/json"
     }
-    example_output = [
-        "latest news renewable energy 2025",
-        "latest solar policy updates north africa 2025 site:reuters.com OR site:bbc.com",
-        "solar farm projects north africa 2025 financing",
-        "north africa green hydrogen partnerships 2025 announcement",
-        "government renewable energy regulation egypt 2025 site:gov.eg",
-        "wind and solar capacity expansion north africa 2025"
-    ]
+    payload = {"prompt": prompt, "max_tokens": max_tokens, "temperature": temperature}
+    try:
+        r = requests.post(MODEL_URL, json=payload, headers=headers, timeout=30)
+        r.raise_for_status()
+        return r.json().get("result", "")
+    except Exception as e:
+        logger.warning("Query model failed: %s", e)
+        return ""
 
+def strip_code_fences(text: str) -> str:
+    # cleans the output """[query1, query2...]"""
+    if not text:
+        return ""
+    return text.replace("```", "").strip()
+
+import re
+from textblob import TextBlob
+
+def heuristic_score(query: str, domain: str = "", niche: str = "") -> int:
+    q = query.lower().strip()
+    q_terms = re.findall(r"\w+", q)
+    domain_terms = re.findall(r"\w+", domain.lower())
+    niche_terms = re.findall(r"\w+", niche.lower())
+
+    # Relevance
+    overlap = len(set(q_terms) & (set(domain_terms) | set(niche_terms)))
+    rel_score = min(100 * overlap / max(1, len(set(domain_terms + niche_terms))), 100)
+
+    # Freshness intent 
+    freshness_keywords = ["2025", "2026", "latest", "recent", "breaking", "update", "trend", "trends", "current"]
+    fresh_hits = sum(k in q for k in freshness_keywords)
+    fresh_score = min(20 * fresh_hits, 100)
+
+    # Source credibility
+    credibility_terms = ["site:", "gov", "bbc","cnn", "reuters", "time", "news.google","bloomberg", "apnews", "official", "press release"]
+    cred_hits = sum(k in q for k in credibility_terms)
+    cred_score = min(25 * cred_hits, 100)
+
+    # Specificity (context-aware)
+    # If query has “updates” but also domain terms, reward it.
+    vague_only = any(v in q for v in ["news", "update", "updates", "trends"]) and overlap == 0
+    length_factor = len(q_terms)
+    if vague_only:
+        spec_score = max(10 * length_factor - 20, 20)  # penalize vague + short
+    else:
+        spec_score = min(10 * length_factor + (5 if "site:" in q else 0), 100)  # reward structured query
+
+    # spelling_errors 
+    blob = TextBlob(query)
+    spelling_errors = abs(len(blob.correct().split()) - len(blob.words))
+    ling_score = max(100 - 10 * spelling_errors, 60)
+
+    # Weighted final score
+    final = (
+        0.35 * rel_score +
+        0.20 * fresh_score +
+        0.20 * cred_score +
+        0.15 * spec_score +
+        0.10 * ling_score
+    )
+
+    return int(round(min(final, 100)))
+
+
+
+def generate_queries(domain: str, niche: str, num_queries: int) -> List[str]:
     prompt = f"""
-        you are a professional news query generator for strategic monitoring.
+        You are a news search strategist.
 
-        goal:
-        - produce short, precise search queries that return factual, recent news for a specified domain and niche.
-        - prefer queries that will expose official announcements, press releases, industry publications, and mainstream media reporting.
-        - avoid generic blog/opinion noise; prefer site:reuters.com OR site:bbc.com style qualifiers when relevant.
-        - output should be a simple json list of query strings, nothing else.
+        Generate {num_queries} short, precise search queries (2–6 words) to find the most recent factual news about:
+        Domain: {domain}
+        Niche: {niche}
 
-        here's an example:
-        input:
-        domain: {example_input['domain']}
-        niche: {example_input['niche']}
-
-        example output:
-        {example_output}
-
-        now generate {num} queries for:
-        domain: {domain}
-        niche: {niche}
-
-        requirements:
-        - each query should be 3-8 words ideally.
-        - include explicit year or 'recent' if relevant.
-        - if suitable, include site: qualifiers for high credibility.
-        - return only a json array (e.g. [\"query1\",\"query2\",...]).
-            """
-    return prompt
-
-def _score_queries_with_model(queries, domain, niche):
-    # we're gon ask another model to score each query 0-100 for precision, reliability and novelty
-    prompt = f"you are a senior prompting engineer. domain: {domain}. niche: {niche}.\nscore each of these search queries 0-100 for expected precision and reliability (higher is better) and provide one-line feedback and an overall score for the list. respond as json: {{'scores': [[query,score,feedback], ...], 'overall': <0-100>}}\nqueries:\n" + "\n".join(queries)
-    resp = openai.ChatCompletion.create(
-        model=SCORER_MODEL, 
-        messages=[{"role":"user","content":prompt}], 
-        temperature=0.0 
-        )
-    text = resp.choices[0].message.content
-    # try to parse numbers naively; if parsing fails, return default high scores
-    results = []
-    try:
-        # model is asked to return json so try to parse it
-        import json
-        parsed = json.loads(text)
-        for item in parsed.get("scores", []):
-            q, score, feedback = item
-            results.append({"query": q, "score": int(score), "feedback": feedback})
-        overall = int(parsed.get("overall", 100))
-    except Exception:
-        # fallback: give 80 to all
-        for q in queries:
-            results.append({"query": q, "score": 80, "feedback": "score fallback"})
-        overall = 80
-    return results, overall
-
-def _improve_query(query, domain, niche):
-    # ask model to rewrite the query for higher precision
-    prompt = f"as a professional search query generator, rewrite the following search query to be more precise and likely to return factual news for domain '{domain}' and niche '{niche}'. keep it short (max 8 words). original: {query}"
-    resp = openai.ChatCompletion.create(
-        model=QUERY_MODEL,
-        messages=[{"role":"user","content":prompt}],
-        temperature=0.2
-    )
-    text = resp.choices[0].message.content.strip()
-    # cleanup
-    return text.splitlines()[0].strip('"').strip()
-
-def generate_queries(domain, niche, num_queries=8):
-    prompt = _build_few_shot_prompt(domain, niche, num_queries)
-    resp = openai.ChatCompletion.create(
-        model=QUERY_MODEL,
-        messages=[{"role":"user","content":prompt}],
-        temperature=0.2
-    )
-    raw = resp.choices[0].message.content.strip()
-    # try to parse json array first
-    import json
+        Requirements:
+        - Focus on recent context (2025-2026).
+        - Prefer official and credible sources (e.g., site:reuters.com, site:bbc.com, site:gov).
+        - Avoid duplicates, vague terms
+        - Return only a JSON array of strings.
+    """
+    response = query_model(prompt)
+    # parse each line, remove numbers/dashes
     queries = []
+    for line in response.splitlines():
+        clean = line.strip().lstrip("0123456789.- ").strip()
+        if clean:
+            queries.append(clean)
+        if len(queries) >= num_queries:
+            break
+    logger.info("Generated queries: %s", queries)
+    return queries
+
+
+def improve_query(q: str, domain: str, niche: str) -> str:
+    prompt = f"I have written this search query in order to search for relevant news about the domain of {domain}, niche: {niche}. Improve it (max 8 words) for precision: '{q}'. Return only the rewritten query."
     try:
-        queries = json.loads(raw)
-        queries = [q.strip() for q in queries if isinstance(q, str) and q.strip()]
+        improved = query_model(prompt, temperature=0.3, max_tokens=50)
+        return strip_code_fences(improved) or q
     except Exception:
-        # fallback: split by lines and clean
-        queries = [line.strip("- ").strip() for line in raw.splitlines() if line.strip()]
+        if "recent" not in q.lower():
+            q += " recent"
+        return q.strip()
 
-    # score queries with the scorer model
-    scored, overall = _score_queries_with_model(queries, domain, niche)
+def score_queries(queries: List[str], domain: str, niche: str) -> List[Dict[str, Any]]:
+    if not queries:
+        return []
+    results = []
+    for q in queries:
+        try:
+            score = heuristic_score(q)
+        except Exception:
+            score = 50
+        results.append({"query": q, "score": score, "feedback": "heuristic fallback"})
+    return results
 
-    # if any query is below threshold, try to improve it once
-    improved = []
-    for item in scored:
-        q = item["query"]
-        score = item["score"]
-        if score < PROMPT_MIN_SCORE:
-            improved_q = _improve_query(q, domain, niche)
-            improved.append({"original": q, "improved": improved_q, "score_before": score})
-        else:
-            improved.append({"original": q, "improved": q, "score_before": score})
-    final_queries = [it["improved"] for it in improved]
-    # remove duplicates while preserving the original order of a list.
-    seen = set()
-    uniq = []
-    for q in final_queries:
-        if q not in seen:
-            seen.add(q)
-            uniq.append(q)
-    return uniq
+
+# PUBLIC INTERFACE
+def run_query_generator(domain: str, niche: str, num: int = 8) -> Dict[str, Any]:
+    logger.info(f"Generating queries for domain='{domain}', niche='{niche}'")
+
+    queries = generate_queries(domain, niche, num)
+    scored = score_queries(queries, domain, niche)
+
+    # improve low-score queries concurrently
+    results = []
+    with ThreadPoolExecutor(max_workers=5) as ex:
+        futures = {ex.submit(improve_query, q["query"], domain, niche): q for q in scored if q["score"] < PROMPT_MIN_SCORE}
+        for q in scored:
+            if q["score"] >= PROMPT_MIN_SCORE:
+                results.append({**q, "improved": q["query"]})
+        for fut in as_completed(futures):
+            q = futures[fut]
+            try:
+                improved_q = fut.result()
+                results.append({**q, "improved": improved_q})
+            except Exception as e:
+                results.append({**q, "improved": q["query"], "error": str(e)})
+
+    structured_output = {
+        "domain": domain,
+        "niche": niche,
+        "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
+        "queries": results
+    }
+
+    os.makedirs("./outputs", exist_ok=True)
+    fname = f"./outputs/query_generator_{domain.replace(' ','_')}.json"
+    with open(fname, "w", encoding="utf-8") as f:
+        json.dump(structured_output, f, indent=2, ensure_ascii=False)
+
+    logger.info(f"Generated {len(results)} queries → saved to {fname}")
+    return structured_output
+
+
+if __name__ == "__main__":
+    from dotenv import load_dotenv
+    load_dotenv()
+    domain = os.getenv("DOMAIN", "AI research")
+    niche = os.getenv("NICHE", "generative AI applications")
+    run_query_generator(domain, niche, num=10)

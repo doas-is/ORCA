@@ -1,9 +1,8 @@
-# compute bias, reliability, relevance, freshness, and strategic score, 
-# domain authority (tld), commercial intent, named entity density, technical term density (based on domain/niche keywords), novelty vs previous headlines.
+# scores how relevant the fetched article is to teh user (computes bias, reliability, relevance, freshness, and strategic score...)
 
 from textblob import TextBlob
 from datetime import datetime
-from src.utils import safe_truncate
+from utils import safe_truncate
 import re
 from collections import Counter
 from urllib.parse import urlparse
@@ -13,9 +12,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-API_KEY = os.getenv("RAPIDAPI_KEY")
-API_HOST = os.getenv("RAPIDAPI_HOST")
-MODEL_URL = os.getenv("MODEL_URL")
+SCORER_API_KEY = os.getenv("SCORER_API_KEY")
+SCORER_API_HOST = os.getenv("SCORER_API_HOST")
+SCORER_MODEL_URL = os.getenv("SCORER_MODEL_URL")
 
 def compute_bias_score(text):
     # abs(polarity)= bias
@@ -65,32 +64,34 @@ def named_entity_density(text):
 def generate_keywords(domain, niche):
     # Generate a list of technical keywords dynamically from domain and niche
     prompt = (
-        f"""You are assisting in a strategic intelligence analysis project.
-        The goal is to evaluate how professional, relevant, and insightful a given article is 
-        within its field, and how valuable it might be for technological, competitive, and strategic watch (veille stratégique, technologique et concurrentielle). 
-        To support this, generate 15 to 20 precise technical keywords that represent the main concepts, tools, methods, or innovations 
-        commonly associated with the domain '{domain}' and the niche '{niche}'. 
-        The keywords should serve as a reference map for detecting how strongly an article relates to this professional field. 
-        Return only a simple comma-separated list of keywords — no explanations or extra text.
-        
-        Example:
-        Domain: Artificial Intelligence
-        Niche: Natural Language Processing
-        Expected output: machine learning, neural networks, transformers, text mining, tokenization, sentiment analysis, 
-        BERT, GPT, attention mechanism, deep learning, data annotation, language modeling, embeddings, corpus analysis, 
-        contextual representation, model fine-tuning, AI ethics, linguistic feature extraction, zero-shot learning, prompt engineering.
+        f"""
+            You are assisting in a strategic intelligence analysis project.
+            The goal is to evaluate how professional, relevant, and insightful a given article is 
+            within its field, and how valuable it might be for technological, competitive, and strategic watch (veille stratégique, 
+            technologique et concurrentielle). 
+            To support this, generate 50 to 70 precise technical keywords that represent the main concepts, tools, methods, or innovations 
+            commonly associated with the domain '{domain}' and the niche '{niche}'. 
+            The keywords should serve as a reference map for detecting how strongly an article relates to this professional field. 
+            Return only a simple comma-separated list of keywords — no explanations or extra text.
+            
+            Example:
+            Domain: Artificial Intelligence
+            Niche: Natural Language Processing
+            Expected output: machine learning, neural networks, transformers, text mining, tokenization, sentiment analysis, 
+            BERT, GPT, attention mechanism, deep learning, data annotation, language modeling, embeddings, corpus analysis, 
+            contextual representation, model fine-tuning, AI ethics, linguistic feature extraction, zero-shot learning, prompt engineering...
         """
     )
 
     payload = {"text": prompt}
     headers = {
-        "x-rapidapi-key": API_KEY,
-        "x-rapidapi-host": API_HOST,
+        "x-rapidapi-key": SCORER_API_KEY,
+        "x-rapidapi-host": SCORER_API_HOST,
         "Content-Type": "application/json"
     }
 
     try:
-        response = requests.post(MODEL_URL, json=payload, headers=headers, timeout=20)
+        response = requests.post(SCORER_MODEL_URL, json=payload, headers=headers, timeout=20)
         response.raise_for_status()
         data = response.json()
 
@@ -114,25 +115,10 @@ def technical_term_density(text, domain, niche):
 
 def commercial_intent_score(text):
     # presence of pricing, buy, demo, sign up words -> higher commercial intent
-    keywords = ["pricing", "price", "buy", "for sale", "subscribe", "signup", "demo", "trial", "launch", "pre-order", "order", "discount", "sale"]
+    keywords = ["pricing", "price", "buy", "for sale", "subscribe", "signup", "demo", "trial", "launch", "pre-order", "order", "discount", "sale", "contact us"]
     text_l = text.lower()
     hits = sum(1 for k in keywords if k in text_l)
     return min(hits / 3.0, 1.0)
-
-def novelty_score(title, existing_titles):
-    # measure how original a given title is compared to other existing titles.
-    if not title:
-        return 0.5
-    tset = set(re.findall(r"\w+", title.lower())) # extracts seperate words from the title
-    max_sim = 0.0
-    for other in existing_titles:
-        oset = set(re.findall(r"\w+", other.lower()))
-        inter = tset & oset
-        union = tset | oset if (tset | oset) else set(["a"]) #uses a dummy set {"a"} to avoid division by zero
-        sim = len(inter)/len(union)
-        if sim > max_sim:
-            max_sim = sim
-    return round(1.0 - max_sim, 3)
 
 def compute_strategic_score(text, title, url, domain, niche, existing_titles):
     # combine signals into a strategic score (0..1)
@@ -143,13 +129,11 @@ def compute_strategic_score(text, title, url, domain, niche, existing_titles):
     named = named_entity_density(text)
     tech = technical_term_density(text, domain, niche)
     commercial = commercial_intent_score(text)
-    novelty = novelty_score(title, existing_titles)
-    # weights tuned to favor relevance/commercial novelty
+
     score = (0.15 * reliability +
              0.10 * (1 - bias) +
              0.20 * tech +
              0.25 * commercial +
-             0.15 * novelty +
              0.15 * named)
     # normalize
     score = max(0.0, min(score, 1.0))
@@ -159,6 +143,5 @@ def compute_strategic_score(text, title, url, domain, niche, existing_titles):
         "technical_density": round(tech, 3),
         "commercial_intent": round(commercial, 3),
         "named_entity_density": round(named, 3),
-        "originality_score": round(novelty, 3),
         "strategic_score": round(score, 3)
     }

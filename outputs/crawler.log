@@ -122,3 +122,437 @@
 2025-10-05 16:33:50 [INFO] ============================================================
 2025-10-05 16:33:50 [INFO] Crawl finished.
 2025-10-05 16:33:50 [INFO] ============================================================
+2025-10-18 21:50:05 [INFO] ============================================================
+2025-10-18 21:50:05 [INFO] playwright enabled: True
+2025-10-18 21:50:05 [INFO] crawl4ai available: True
+2025-10-18 21:50:05 [INFO] ============================================================
+2025-10-18 21:50:05 [WARNING] no urls to crawl. exiting.
+2025-10-18 21:59:23 [INFO] ============================================================
+2025-10-18 21:59:23 [INFO] playwright enabled: True
+2025-10-18 21:59:23 [INFO] crawl4ai available: True
+2025-10-18 21:59:23 [INFO] ============================================================
+2025-10-18 22:01:46 [INFO] 
+--- crawling 1/1: https://www.rolls-roycemotorcars.com/en_GB/home.html ---
+2025-10-18 22:01:47 [INFO] starting crawl: https://www.rolls-roycemotorcars.com/en_GB/home.html (domain: rolls-roycemotorcars.com)
+2025-10-18 22:01:47 [INFO] crawl delay suggested by robots: 0s
+2025-10-18 22:01:59 [INFO] crawl4ai snapshot generated for https://www.rolls-roycemotorcars.com/en_GB/home.html
+2025-10-18 22:03:59 [INFO] playwright render suggests a captcha or block at https://www.rolls-roycemotorcars.com/en_GB/home.html
+2025-10-18 22:03:59 [INFO] crawl complete: rolls-roycemotorcars.com - 0 pages
+2025-10-18 22:03:59 [INFO] saved result to: ./outputs\rolls-roycemotorcars_com_crawl_1760821439.json
+2025-10-18 22:03:59 [INFO] ============================================================
+2025-10-18 22:03:59 [INFO] crawl finished.
+2025-10-18 22:03:59 [INFO] ============================================================
+2025-10-18 22:05:46 [INFO] ============================================================
+2025-10-18 22:05:46 [INFO] playwright enabled: True
+2025-10-18 22:05:46 [INFO] crawl4ai available: True
+2025-10-18 22:05:46 [INFO] ============================================================
+2025-10-18 22:07:27 [INFO] 
+--- crawling 1/1: https://www.travelperk.com/ ---
+2025-10-18 22:07:27 [INFO] starting crawl: https://www.travelperk.com/ (domain: travelperk.com)
+2025-10-18 22:07:27 [INFO] crawl delay suggested by robots: 0s
+2025-10-18 22:07:41 [INFO] crawl4ai snapshot generated for https://www.travelperk.com/
+2025-10-18 22:09:53 [INFO] crawled [1/70]: https://www.travelperk.com/
+2025-10-18 22:09:53 [INFO] visiting external link: https://www.linkedin.com/company/travelperk/
+2025-10-18 22:11:29 [INFO] playwright render suggests a captcha or block at https://www.linkedin.com/company/travelperk/
+2025-10-18 22:11:52 [INFO] visiting external link: https://www.instagram.com/travelperk/
+2025-10-18 22:13:45 [INFO] playwright render suggests a captcha or block at https://www.instagram.com/travelperk/
+2025-10-18 22:13:45 [INFO] visiting external link: https://www.bbc.com/news/av/business-48285024
+2025-10-18 22:15:36 [INFO] playwright render suggests a captcha or block at https://www.bbc.com/news/av/business-48285024
+2025-10-18 22:15:36 [INFO] visiting external link: https://www.forbes.com/sites/trevorclawson/2024/05/31/loyalty-bonus-how-a-travel-unicorn-has-grown-in-a-constrained-market/
+2025-10-18 22:17:37 [INFO] playwright render suggests a captcha or block at https://www.forbes.com/sites/trevorclawson/2024/05/31/loyalty-bonus-how-a-travel-unicorn-has-grown-in-a-constrained-market/
+2025-10-18 22:17:37 [INFO] visiting external link: https://www.forbes.com/sites/trevorclawson/2024/03/18/where-next-for-barcelonas-startup-funding-ecosystem/
+2025-10-18 22:19:36 [INFO] playwright render suggests a captcha or block at https://www.forbes.com/sites/trevorclawson/2024/03/18/where-next-for-barcelonas-startup-funding-ecosystem/
+2025-10-18 22:19:39 [INFO] visiting external link: https://www.bloomberg.com/news/articles/2022-01-12/travelperk-hits-1-3-billion-valuation-as-business-trips-rebound?srnd=technology-vp
+2025-10-18 22:21:16 [INFO] playwright render suggests a captcha or block at https://www.bloomberg.com/news/articles/2022-01-12/travelperk-hits-1-3-billion-valuation-as-business-trips-rebound?srnd=technology-vp
+2025-10-18 22:21:16 [INFO] visiting external link: https://www.cnbc.com/2024/01/23/softbank-leads-104-million-investment-in-travel-startup-travelperk.html
+2025-10-18 22:23:14 [INFO] playwright render suggests a captcha or block at https://www.cnbc.com/2024/01/23/softbank-leads-104-million-investment-in-travel-startup-travelperk.html
+2025-10-18 22:23:14 [INFO] visiting external link: https://www.youtube.com/watch?v=I-tJpzzXVlc&t=1s
+2025-10-18 22:24:54 [INFO] playwright render suggests a captcha or block at https://www.youtube.com/watch?v=I-tJpzzXVlc&t=1s
+2025-10-18 22:24:57 [INFO] visiting external link: https://skift.com/2024/06/14/travelperk-sees-corporate-travel-bouncing-back-but-not-for-all/
+2025-10-18 22:26:42 [INFO] playwright render suggests a captcha or block at https://skift.com/2024/06/14/travelperk-sees-corporate-travel-bouncing-back-but-not-for-all/
+2025-10-18 22:26:43 [INFO] visiting external link: https://www.cnbc.com/2024/06/18/travelperk-acquires-us-rival-amtrav-bags-135-million-for-expansion.html
+2025-10-18 22:28:42 [INFO] playwright render suggests a captcha or block at https://www.cnbc.com/2024/06/18/travelperk-acquires-us-rival-amtrav-bags-135-million-for-expansion.html
+2025-10-18 22:28:42 [INFO] visiting external link: https://x.com/travelperk
+2025-10-18 22:30:14 [INFO] playwright render suggests a captcha or block at https://x.com/travelperk
+2025-10-18 22:30:14 [INFO] visiting external link: https://www.cnbc.com/2025/01/28/softbank-backed-travelperk-doubles-valuation-plans-fintech-push.html
+2025-10-18 22:31:56 [INFO] playwright render suggests a captcha or block at https://www.cnbc.com/2025/01/28/softbank-backed-travelperk-doubles-valuation-plans-fintech-push.html
+2025-10-18 22:33:32 [INFO] crawled [2/70]: https://www.travelperk.com/travel-solutions/group-bookings/
+2025-10-18 22:35:08 [INFO] crawled [3/70]: https://www.travelperk.com/media/
+2025-10-18 22:36:43 [INFO] crawled [4/70]: https://www.travelperk.com/legal/terms-of-use/
+2025-10-18 22:38:43 [INFO] crawled [5/70]: https://www.travelperk.com/it/
+2025-10-18 22:40:16 [INFO] crawled [6/70]: https://trustcenter.travelperk.com
+2025-10-18 22:41:50 [INFO] crawled [7/70]: https://www.travelperk.com/modern-slavery-statement/
+2025-10-18 22:46:21 [INFO] crawled [8/70]: https://www.travelperk.com/nl/
+2025-10-18 22:47:56 [INFO] crawled [9/70]: https://www.travelperk.com/case-studies/ampa/
+2025-10-18 22:49:29 [INFO] crawled [10/70]: https://www.travelperk.com/travel-solutions/flexiperk/
+2025-10-18 22:51:05 [INFO] crawled [11/70]: https://www.travelperk.com/case-studies/university-of-vic/
+2025-10-18 22:52:37 [INFO] crawled [12/70]: https://support.travelperk.com/hc/en-us
+2025-10-18 22:54:12 [INFO] crawled [13/70]: https://www.travelperk.com/ebooks/
+2025-10-18 22:55:45 [INFO] crawled [14/70]: https://www.travelperk.com/travel-solutions/travel-software/
+2025-10-20 10:35:59 [WARNING] crawl4ai not installed or import failed, skipping crawl4ai integration
+2025-10-20 10:35:59 [INFO] ============================================================
+2025-10-20 10:35:59 [INFO] playwright enabled: False
+2025-10-20 10:35:59 [INFO] crawl4ai available: False
+2025-10-20 10:35:59 [INFO] ============================================================
+2025-10-20 11:34:12 [INFO] 
+--- crawling 1/1: https://www.travelperk.com/ ---
+2025-10-20 11:34:13 [INFO] starting crawl: https://www.travelperk.com/ (domain: travelperk.com)
+2025-10-20 11:34:13 [INFO] crawl delay suggested by robots: 0s
+2025-10-20 11:35:41 [INFO] crawl complete: travelperk.com - 0 pages
+2025-10-20 11:35:41 [INFO] saved result to: ./outputs\travelperk_com_crawl_1760956541.json
+2025-10-20 11:35:41 [INFO] ============================================================
+2025-10-20 11:35:41 [INFO] crawl finished.
+2025-10-20 11:35:41 [INFO] ============================================================
+2025-10-20 11:54:30 [WARNING] crawl4ai not installed or import failed, skipping crawl4ai integration
+2025-10-20 11:54:30 [INFO] ============================================================
+2025-10-20 11:54:30 [INFO] playwright enabled: False
+2025-10-20 11:54:30 [INFO] crawl4ai available: False
+2025-10-20 11:54:30 [INFO] ============================================================
+2025-10-20 11:54:33 [INFO] 
+--- crawling 1/1: https://www.travelperk.com/ ---
+2025-10-20 11:54:33 [INFO] starting crawl: https://www.travelperk.com/ (domain: travelperk.com)
+2025-10-20 11:54:34 [INFO] crawl delay suggested by robots: 0s
+2025-10-20 11:56:02 [INFO] crawl complete: travelperk.com - 0 pages
+2025-10-20 11:56:02 [INFO] saved result to: ./outputs\travelperk_com_crawl_1760957762.json
+2025-10-20 11:56:02 [INFO] ============================================================
+2025-10-20 11:56:02 [INFO] crawl finished.
+2025-10-20 11:56:02 [INFO] ============================================================
+2025-10-20 12:10:08 [WARNING] crawl4ai not installed or import failed, skipping crawl4ai integration
+2025-10-20 12:10:08 [INFO] ============================================================
+2025-10-20 12:10:08 [INFO] playwright enabled: False
+2025-10-20 12:10:08 [INFO] crawl4ai available: False
+2025-10-20 12:10:08 [INFO] ============================================================
+2025-10-20 12:10:09 [INFO] 
+--- crawling 1/1: https://www.travelperk.com/ ---
+2025-10-20 12:10:09 [INFO] starting crawl: https://www.travelperk.com/ (domain: travelperk.com)
+2025-10-20 12:10:10 [INFO] crawl delay suggested by robots: 0s
+2025-10-20 12:11:37 [INFO] crawl complete: travelperk.com - 0 pages
+2025-10-20 12:11:37 [INFO] saved result to: ./outputs\travelperk_com_crawl_1760958697.json
+2025-10-20 12:11:37 [INFO] ============================================================
+2025-10-20 12:11:37 [INFO] crawl finished.
+2025-10-20 12:11:37 [INFO] ============================================================
+2025-10-20 20:46:25 [INFO] crawl4ai not installed, skipping crawl4ai integration
+2025-10-20 20:46:25 [INFO] ============================================================
+2025-10-20 20:46:25 [INFO]    Playwright enabled: False
+2025-10-20 20:46:25 [INFO]    crawl4ai available: False
+2025-10-20 20:46:25 [INFO]    Max pages per domain: 70
+2025-10-20 20:46:25 [INFO]    Output directory: ./outputs
+2025-10-20 20:46:25 [INFO] ============================================================
+2025-10-20 20:46:27 [INFO] 
+============================================================
+2025-10-20 20:46:27 [INFO] Crawling 1/1: https://www.travelperk.com/
+2025-10-20 20:46:27 [INFO] ============================================================
+2025-10-20 20:46:28 [INFO] Fetching: https://www.travelperk.com/
+2025-10-20 20:47:55 [WARNING] Failed to fetch https://www.travelperk.com/ with requests
+2025-10-20 20:47:55 [WARNING] No HTML content for https://www.travelperk.com/
+2025-10-20 20:47:55 [INFO] 
+============================================================
+2025-10-20 20:47:55 [INFO] ============================================================
+2025-10-20 21:04:27 [INFO] crawl4ai not installed, skipping crawl4ai integration
+2025-10-20 21:04:27 [INFO] ============================================================
+2025-10-20 21:04:27 [INFO]    Playwright enabled: False
+2025-10-20 21:04:27 [INFO]    crawl4ai available: False
+2025-10-20 21:04:27 [INFO]    Max pages per domain: 70
+2025-10-20 21:04:27 [INFO]    Output directory: ./outputs
+2025-10-20 21:04:27 [INFO] ============================================================
+2025-10-20 21:04:28 [INFO] 
+============================================================
+2025-10-20 21:04:28 [INFO] Crawling 1/1: https://www.travelperk.com/
+2025-10-20 21:04:28 [INFO] ============================================================
+2025-10-20 21:04:29 [INFO] Fetching: https://www.travelperk.com/
+2025-10-20 21:05:56 [WARNING] Failed to fetch https://www.travelperk.com/ with requests
+2025-10-20 21:05:56 [WARNING] No HTML content for https://www.travelperk.com/
+2025-10-20 21:05:56 [INFO] 
+============================================================
+2025-10-20 21:05:56 [INFO] ============================================================
+2025-10-20 21:10:12 [WARNING] crawl4ai not installed or import failed, skipping crawl4ai integration
+2025-10-20 21:10:12 [INFO] ============================================================
+2025-10-20 21:10:12 [INFO] playwright enabled: False
+2025-10-20 21:10:12 [INFO] crawl4ai available: False
+2025-10-20 21:10:12 [INFO] ============================================================
+2025-10-20 21:10:20 [INFO] 
+--- crawling 1/1: . ---
+2025-10-20 21:10:20 [INFO] starting crawl: . (domain: )
+2025-10-20 21:10:20 [INFO] crawl delay suggested by robots: 0s
+2025-10-20 21:10:21 [INFO] crawl complete:  - 0 pages
+2025-10-20 21:10:21 [INFO] saved result to: ./outputs\_crawl_1760991021.json
+2025-10-20 21:10:21 [INFO] ============================================================
+2025-10-20 21:10:21 [INFO] crawl finished.
+2025-10-20 21:10:21 [INFO] ============================================================
+2025-10-20 21:15:24,109 [INFO] ======================================================================
+2025-10-20 21:15:24,110 [INFO] Crawling start URL: https://www.talan.com
+2025-10-20 21:15:24,110 [INFO] Starting crawl: https://www.talan.com (max_pages=15)
+2025-10-20 21:15:25,452 [INFO] [1/15] Crawled: https://www.talan.com (internal:119 external:7)
+2025-10-20 21:15:26,044 [INFO] [2/15] Crawled: https://www.talan.com#main-content (internal:119 external:7)
+2025-10-20 21:15:26,566 [INFO] [3/15] Crawled: https://www.talan.com#main-navigation (internal:119 external:7)
+2025-10-20 21:15:27,055 [INFO] [4/15] Crawled: https://www.talan.com/americas/en (internal:154 external:4)
+2025-10-20 21:15:27,537 [INFO] [5/15] Crawled: https://www.talan.com/americas/fr (internal:135 external:4)
+2025-10-20 21:15:28,153 [INFO] [6/15] Crawled: https://www.talan.com/uk/en (internal:123 external:7)
+2025-10-20 21:15:28,660 [INFO] [7/15] Crawled: https://www.talan.com/france/fr (internal:119 external:7)
+2025-10-20 21:15:29,102 [INFO] [8/15] Crawled: https://www.talan.com/global/en (internal:119 external:7)
+2025-10-20 21:15:29,584 [INFO] [9/15] Crawled: https://www.talan.com/global/fr (internal:126 external:7)
+2025-10-20 21:15:31,473 [INFO] [10/15] Crawled: https://www.talan.com/global/en/contact-us-global (internal:110 external:7)
+2025-10-20 21:15:33,461 [INFO] [11/15] Crawled: https://www.talan.com/global/en/capabilities/shaping-your-transformation/transformation-governance-and-decision-making (internal:115 external:7)
+2025-10-20 21:15:35,162 [INFO] [12/15] Crawled: https://www.talan.com/global/en/capabilities/shaping-your-transformation/integrate-technology-your-strategy (internal:115 external:7)
+2025-10-20 21:15:36,817 [INFO] [13/15] Crawled: https://www.talan.com/global/en/capabilities/shaping-your-transformation/reinvent-your-business-model (internal:115 external:7)
+2025-10-20 21:15:38,678 [INFO] [14/15] Crawled: https://www.talan.com/global/en/capabilities/shaping-your-transformation/enhance-your-companys-resilience-and-operational-excellence (internal:115 external:7)
+2025-10-20 21:15:39,370 [INFO] [15/15] Crawled: https://www.talan.com/global/en/excellence-and-innovation-supply-chain-logistics-transformation (internal:103 external:7)
+2025-10-20 21:15:39,372 [INFO] Saved results to outputs\orenda_www_talan_com_1760991339.json
+2025-10-20 21:15:39,373 [INFO] All done.
+2025-10-20 21:29:30,016 [INFO] Crawling: https://www.talan.com
+2025-10-20 21:29:32,393 [INFO] Crawling: https://www.talan.com/uk/en
+2025-10-20 21:29:36,503 [INFO] Crawling: https://www.talan.com/global/en/industries/transforming-healthcare
+2025-10-20 21:29:40,068 [INFO] Crawling: https://www.talan.com/global/en/capabilities/unleashing-power-technology/sap
+2025-10-20 21:29:43,701 [INFO] Crawling: https://www.talan.com/global/en/join-talan-community-curious-minds
+2025-10-20 21:29:46,038 [INFO] Crawling: https://www.talan.com/global/en/capabilities/shaping-your-transformation/enhance-your-companys-resilience-and-operational-excellence
+2025-10-20 21:29:49,168 [INFO] Crawling: https://www.talan.com/global/en/industries/guiding-insurance-sector-through-transformations
+2025-10-20 21:29:51,981 [INFO] Crawling: https://www.talan.com/global/en/industries/transport-and-logistics
+2025-10-20 21:29:55,550 [INFO] Crawling: https://www.talan.com/global/en/all-our-insights
+2025-10-20 21:29:58,769 [INFO] Crawling: https://www.talan.com/global/en/join-us/our-job-offers
+2025-10-20 21:30:10,794 [INFO] Detected blog section: https://www.talan.com/global/en/all-our-insights
+2025-10-20 21:31:24,320 [INFO] Crawling: https://www.talan.com
+2025-10-20 21:31:26,636 [INFO] Crawling: https://www.talan.com/global/en/capabilities/talan-method/talan-method-innovating-through-research
+2025-10-20 21:31:28,816 [INFO] Crawling: https://www.talan.com/global/en/architecting-agentic-world
+2025-10-20 21:31:31,325 [INFO] Crawling: https://www.talan.com/global/en/capabilities/unleashing-power-technology/microsoft-talan
+2025-10-20 21:31:34,745 [INFO] Crawling: https://www.talan.com/global/en/talan-obtains-approval-cnil-its-binding-corporate-rules-secure-data-transfers-within-its-group
+2025-10-20 21:31:37,188 [INFO] Crawling: https://www.talan.com/global/en/capabilities/talan-method/talan-method-putting-data-service-change
+2025-10-20 21:31:39,262 [INFO] Crawling: https://www.talan.com/global/en/all-our-insights
+2025-10-20 21:31:41,315 [INFO] Crawling: https://www.talan.com/global/en/capabilities/shaping-your-transformation/reinvent-your-business-model
+2025-10-20 21:31:44,901 [INFO] Crawling: https://www.talan.com/global/en/capabilities/nurturing-positive-innovation/positive-innovation
+2025-10-20 21:31:47,099 [INFO] Crawling: https://www.talan.com/global/en/ai-agents-vs-multi-agent-systems-solo-expertise-orchestrated-collective-intelligence
+2025-10-20 21:31:55,500 [INFO] Detected blog section: https://www.talan.com/global/en/all-our-insights
+2025-10-20 21:32:16 [WARNING] crawl4ai not installed or import failed, skipping crawl4ai integration
+2025-10-20 21:32:16 [INFO] ============================================================
+2025-10-20 21:32:16 [INFO] playwright enabled: False
+2025-10-20 21:32:16 [INFO] crawl4ai available: False
+2025-10-20 21:32:16 [INFO] ============================================================
+2025-10-20 21:32:18 [INFO] 
+--- crawling 1/1: https://www.talan.com ---
+2025-10-20 21:32:18 [INFO] starting crawl: https://www.talan.com (domain: talan.com)
+2025-10-20 21:32:18 [INFO] crawl delay suggested by robots: 0s
+2025-10-20 21:33:46 [INFO] crawl complete: talan.com - 0 pages
+2025-10-20 21:33:46 [INFO] saved result to: ./outputs\talan_com_crawl_1760992426.json
+2025-10-20 21:33:46 [INFO] ============================================================
+2025-10-20 21:33:46 [INFO] crawl finished.
+2025-10-20 21:33:46 [INFO] ============================================================
+2025-10-20 21:57:47,161 [INFO] ======================================================================
+2025-10-20 21:57:47,161 [INFO] Crawling start URL: https://www.talan.com
+2025-10-20 21:57:47,162 [INFO] Starting crawl: https://www.talan.com (max_pages=25)
+2025-10-20 21:57:48,354 [INFO] [1/25] Crawled: https://www.talan.com (internal:119 external:7)
+2025-10-20 21:57:48,886 [INFO] [2/25] Crawled: https://www.talan.com#main-content (internal:119 external:7)
+2025-10-20 21:57:49,430 [INFO] [3/25] Crawled: https://www.talan.com#main-navigation (internal:119 external:7)
+2025-10-20 21:57:49,854 [INFO] [4/25] Crawled: https://www.talan.com/americas/en (internal:154 external:4)
+2025-10-20 21:57:50,337 [INFO] [5/25] Crawled: https://www.talan.com/americas/fr (internal:135 external:4)
+2025-10-20 21:57:50,824 [INFO] [6/25] Crawled: https://www.talan.com/uk/en (internal:123 external:7)
+2025-10-20 21:57:51,243 [INFO] [7/25] Crawled: https://www.talan.com/france/fr (internal:119 external:7)
+2025-10-20 21:57:51,713 [INFO] [8/25] Crawled: https://www.talan.com/global/en (internal:119 external:7)
+2025-10-20 21:57:52,180 [INFO] [9/25] Crawled: https://www.talan.com/global/fr (internal:126 external:7)
+2025-10-20 21:57:52,584 [INFO] [10/25] Crawled: https://www.talan.com/global/en/contact-us-global (internal:110 external:7)
+2025-10-20 21:57:53,012 [INFO] [11/25] Crawled: https://www.talan.com/global/en/capabilities/shaping-your-transformation/transformation-governance-and-decision-making (internal:115 external:7)
+2025-10-20 21:57:53,445 [INFO] [12/25] Crawled: https://www.talan.com/global/en/capabilities/shaping-your-transformation/integrate-technology-your-strategy (internal:115 external:7)
+2025-10-20 21:57:53,857 [INFO] [13/25] Crawled: https://www.talan.com/global/en/capabilities/shaping-your-transformation/reinvent-your-business-model (internal:115 external:7)
+2025-10-20 21:57:54,400 [INFO] [14/25] Crawled: https://www.talan.com/global/en/capabilities/shaping-your-transformation/enhance-your-companys-resilience-and-operational-excellence (internal:115 external:7)
+2025-10-20 21:57:54,849 [INFO] [15/25] Crawled: https://www.talan.com/global/en/excellence-and-innovation-supply-chain-logistics-transformation (internal:103 external:7)
+2025-10-20 21:57:56,691 [INFO] [16/25] Crawled: https://www.talan.com/global/en/capabilities/shaping-your-transformation/boost-employee-experience-your-company (internal:115 external:7)
+2025-10-20 21:57:57,982 [INFO] [17/25] Crawled: https://www.talan.com/global/en/capabilities/shaping-your-transformation/reinvent-customer-experience-talan (internal:115 external:7)
+2025-10-20 21:57:58,435 [INFO] [18/25] Crawled: https://www.talan.com/global/en/capabilities/shaping-your-transformation/fully-engage-your-company-low-carbon-transition-talan (internal:115 external:7)
+2025-10-20 21:58:00,094 [INFO] [19/25] Crawled: https://www.talan.com/global/en/capabilities/shaping-your-transformation/adapt-regulations-and-geopolitical-constraints (internal:115 external:7)
+2025-10-20 21:58:01,117 [INFO] [20/25] Crawled: https://www.talan.com/global/en/shaping-your-transformation-our-solutions (internal:111 external:7)
+2025-10-20 21:58:03,079 [INFO] [21/25] Crawled: https://www.talan.com/global/en/capabilities/capture-richness-your-data-data-x-ia (internal:118 external:7)
+2025-10-20 21:58:04,928 [INFO] [22/25] Crawled: https://www.talan.com/global/en/capabilities/capture-richness-your-data/data-governance-and-management (internal:114 external:7)
+2025-10-20 21:58:06,258 [INFO] [23/25] Crawled: https://www.talan.com/global/en/capabilities/capture-richness-your-data/data-strategy-and-associated-architecture (internal:114 external:7)
+2025-10-20 21:58:07,839 [INFO] [24/25] Crawled: https://www.talan.com/global/en/capabilities/capture-richness-your-data/data-democratization-talan (internal:114 external:7)
+2025-10-20 21:58:09,438 [INFO] [25/25] Crawled: https://www.talan.com/global/en/capabilities/capture-richness-your-data/go-green-data (internal:114 external:7)
+2025-10-20 21:58:09,440 [INFO] Saved results to outputs\orenda_www_talan_com_1760993889.json
+2025-10-20 21:58:09,440 [INFO] All done.
+2025-10-20 21:59:17,531 [INFO] ======================================================================
+2025-10-20 21:59:17,532 [INFO] Crawling start URL: https://www.talan.com
+2025-10-20 21:59:17,532 [INFO] Starting crawl: https://www.talan.com (max_pages=25)
+2025-10-20 21:59:18,675 [INFO] [1/25] Crawled: https://www.talan.com (internal:119 external:7)
+2025-10-20 21:59:19,168 [INFO] [2/25] Crawled: https://www.talan.com#main-content (internal:119 external:7)
+2025-10-20 21:59:19,684 [INFO] [3/25] Crawled: https://www.talan.com#main-navigation (internal:119 external:7)
+2025-10-20 21:59:20,141 [INFO] [4/25] Crawled: https://www.talan.com/americas/en (internal:154 external:4)
+2025-10-20 21:59:20,586 [INFO] [5/25] Crawled: https://www.talan.com/americas/fr (internal:135 external:4)
+2025-10-20 21:59:21,005 [INFO] [6/25] Crawled: https://www.talan.com/uk/en (internal:123 external:7)
+2025-10-20 21:59:21,466 [INFO] [7/25] Crawled: https://www.talan.com/france/fr (internal:119 external:7)
+2025-10-20 21:59:21,893 [INFO] [8/25] Crawled: https://www.talan.com/global/en (internal:119 external:7)
+2025-10-20 21:59:22,311 [INFO] [9/25] Crawled: https://www.talan.com/global/fr (internal:126 external:7)
+2025-10-20 21:59:22,703 [INFO] [10/25] Crawled: https://www.talan.com/global/en/contact-us-global (internal:110 external:7)
+2025-10-20 21:59:23,120 [INFO] [11/25] Crawled: https://www.talan.com/global/en/capabilities/shaping-your-transformation/transformation-governance-and-decision-making (internal:115 external:7)
+2025-10-20 21:59:23,535 [INFO] [12/25] Crawled: https://www.talan.com/global/en/capabilities/shaping-your-transformation/integrate-technology-your-strategy (internal:115 external:7)
+2025-10-20 21:59:23,953 [INFO] [13/25] Crawled: https://www.talan.com/global/en/capabilities/shaping-your-transformation/reinvent-your-business-model (internal:115 external:7)
+2025-10-20 21:59:24,349 [INFO] [14/25] Crawled: https://www.talan.com/global/en/capabilities/shaping-your-transformation/enhance-your-companys-resilience-and-operational-excellence (internal:115 external:7)
+2025-10-20 21:59:24,770 [INFO] [15/25] Crawled: https://www.talan.com/global/en/excellence-and-innovation-supply-chain-logistics-transformation (internal:103 external:7)
+2025-10-20 21:59:25,180 [INFO] [16/25] Crawled: https://www.talan.com/global/en/capabilities/shaping-your-transformation/boost-employee-experience-your-company (internal:115 external:7)
+2025-10-20 21:59:25,591 [INFO] [17/25] Crawled: https://www.talan.com/global/en/capabilities/shaping-your-transformation/reinvent-customer-experience-talan (internal:115 external:7)
+2025-10-20 21:59:26,024 [INFO] [18/25] Crawled: https://www.talan.com/global/en/capabilities/shaping-your-transformation/fully-engage-your-company-low-carbon-transition-talan (internal:115 external:7)
+2025-10-20 21:59:26,433 [INFO] [19/25] Crawled: https://www.talan.com/global/en/capabilities/shaping-your-transformation/adapt-regulations-and-geopolitical-constraints (internal:115 external:7)
+2025-10-20 21:59:26,845 [INFO] [20/25] Crawled: https://www.talan.com/global/en/shaping-your-transformation-our-solutions (internal:111 external:7)
+2025-10-20 21:59:27,245 [INFO] [21/25] Crawled: https://www.talan.com/global/en/capabilities/capture-richness-your-data-data-x-ia (internal:118 external:7)
+2025-10-20 21:59:27,642 [INFO] [22/25] Crawled: https://www.talan.com/global/en/capabilities/capture-richness-your-data/data-governance-and-management (internal:114 external:7)
+2025-10-20 21:59:28,072 [INFO] [23/25] Crawled: https://www.talan.com/global/en/capabilities/capture-richness-your-data/data-strategy-and-associated-architecture (internal:114 external:7)
+2025-10-20 21:59:28,473 [INFO] [24/25] Crawled: https://www.talan.com/global/en/capabilities/capture-richness-your-data/data-democratization-talan (internal:114 external:7)
+2025-10-20 21:59:28,901 [INFO] [25/25] Crawled: https://www.talan.com/global/en/capabilities/capture-richness-your-data/go-green-data (internal:114 external:7)
+2025-10-20 21:59:28,903 [INFO] Saved results to outputs\orenda_www_talan_com_1760993968.json
+2025-10-20 21:59:28,904 [INFO] All done.
+2025-10-20 22:04:52,627 [INFO] ======================================================================
+2025-10-20 22:04:52,627 [INFO] Crawling start URL: https://www.travelperk.com/
+2025-10-20 22:04:52,628 [INFO] Starting crawl: https://www.travelperk.com/ (max_pages=25)
+2025-10-20 22:04:53,951 [INFO] [1/25] Crawled: https://www.travelperk.com/ (internal:184 external:27)
+2025-10-20 22:04:54,448 [INFO] [2/25] Crawled: https://www.travelperk.com/customers/ (internal:150 external:8)
+2025-10-20 22:04:54,778 [INFO] [3/25] Crawled: https://www.travelperk.com/pricing/ (internal:106 external:10)
+2025-10-20 22:04:55,101 [INFO] [4/25] Crawled: https://www.travelperk.com/demo-request/ (internal:104 external:24)
+2025-10-20 22:04:55,440 [INFO] [5/25] Crawled: https://www.travelperk.com/travel-solutions/corporate-travel-management/ (internal:116 external:12)
+2025-10-20 22:04:55,799 [INFO] [6/25] Crawled: https://www.travelperk.com/travel-solutions/flexiperk/ (internal:115 external:9)
+2025-10-20 22:04:56,221 [INFO] [7/25] Crawled: https://www.travelperk.com/travel-solutions/greenperk/ (internal:101 external:9)
+2025-10-20 22:04:56,588 [INFO] [8/25] Crawled: https://www.travelperk.com/travel-solutions/group-bookings/ (internal:107 external:8)
+2025-10-20 22:04:56,902 [INFO] [9/25] Crawled: https://www.travelperk.com/travel-solutions/executive-experience/ (internal:102 external:8)
+2025-10-20 22:04:57,285 [INFO] [10/25] Crawled: https://www.travelperk.com/travel-solutions/marketplace/ (internal:117 external:10)
+2025-10-20 22:04:57,601 [INFO] [11/25] Crawled: https://www.travelperk.com/travel-solutions/corporate-travel-assistance/ (internal:102 external:8)
+2025-10-20 22:04:58,014 [INFO] [12/25] Crawled: https://www.travelperk.com/travel-solutions/ (internal:123 external:10)
+2025-10-20 22:04:58,347 [INFO] [13/25] Crawled: https://www.travelperk.com/travel-solutions/persona-traveler/ (internal:120 external:12)
+2025-10-20 22:04:59,012 [INFO] [14/25] Crawled: https://www.travelperk.com/travel-solutions/travel-safety-advice/ (internal:350 external:8)
+2025-10-20 22:04:59,325 [INFO] [15/25] Crawled: https://www.travelperk.com/travel-solutions/corporate-flights/ (internal:102 external:8)
+2025-10-20 22:04:59,644 [INFO] [16/25] Crawled: https://www.travelperk.com/travel-solutions/corporate-rail/ (internal:103 external:8)
+2025-10-20 22:04:59,962 [INFO] [17/25] Crawled: https://www.travelperk.com/travel-solutions/corporate-accommodation/ (internal:106 external:8)
+2025-10-20 22:05:00,337 [INFO] [18/25] Crawled: https://www.travelperk.com/travel-solutions/corporate-car-rental/ (internal:103 external:8)
+2025-10-20 22:05:00,737 [INFO] [19/25] Crawled: https://www.travelperk.com/travel-solutions/persona-travel-manager/ (internal:123 external:10)
+2025-10-20 22:05:01,052 [INFO] [20/25] Crawled: https://www.travelperk.com/travel-solutions/policies-approvals/ (internal:102 external:8)
+2025-10-20 22:05:01,370 [INFO] [21/25] Crawled: https://www.travelperk.com/travel-solutions/duty-of-care/ (internal:100 external:8)
+2025-10-20 22:05:01,702 [INFO] [22/25] Crawled: https://www.travelperk.com/travel-solutions/corporate-travel-tracker/ (internal:103 external:8)
+2025-10-20 22:05:02,056 [INFO] [23/25] Crawled: https://www.travelperk.com/travel-solutions/persona-finance-team/ (internal:121 external:10)
+2025-10-20 22:05:02,854 [INFO] [24/25] Crawled: https://www.travelperk.com/travel-solutions/travel-management-reporting/ (internal:103 external:8)
+2025-10-20 22:05:03,514 [INFO] [25/25] Crawled: https://www.travelperk.com/travel-solutions/expense-management/ (internal:105 external:8)
+2025-10-20 22:05:03,517 [INFO] Saved results to outputs\orenda_www_travelperk_com_1760994303.json
+2025-10-20 22:05:03,517 [INFO] All done.
+2025-10-21 16:45:20,313 [INFO] ======================================================================
+2025-10-21 16:45:20,315 [INFO] Crawling start URL: http://["https://www.theguardian.com/international"
+2025-10-21 16:45:20,315 [INFO] Starting crawl: http://["https://www.theguardian.com/international" (max_pages=30)
+2025-10-21 16:46:13,768 [INFO] ======================================================================
+2025-10-21 16:46:13,769 [INFO] Crawling start URL: https://www.theguardian.com/international
+2025-10-21 16:46:13,769 [INFO] Starting crawl: https://www.theguardian.com/international (max_pages=30)
+2025-10-21 16:46:14,960 [INFO] block/captcha suspected at https://www.theguardian.com/international, trying playwright render
+2025-10-21 16:46:38,631 [INFO] [1/30] Crawled: https://www.theguardian.com/international (internal:304 external:31)
+2025-10-21 16:46:38,910 [INFO] block/captcha suspected at https://www.theguardian.com/international#maincontent, trying playwright render
+2025-10-21 16:46:44,316 [INFO] [2/30] Crawled: https://www.theguardian.com/international#maincontent (internal:304 external:31)
+2025-10-21 16:46:44,589 [INFO] block/captcha suspected at https://www.theguardian.com/international#navigation, trying playwright render
+2025-10-21 16:46:49,629 [INFO] [3/30] Crawled: https://www.theguardian.com/international#navigation (internal:304 external:31)
+2025-10-21 16:46:49,880 [INFO] block/captcha suspected at https://www.theguardian.com/technology/ng-interactive/2025/oct/21/why-the-manosphere-clicked-for-young-men-a-visual-deep-dive, trying playwright render
+2025-10-21 16:46:55,454 [INFO] [4/30] Crawled: https://www.theguardian.com/technology/ng-interactive/2025/oct/21/why-the-manosphere-clicked-for-young-men-a-visual-deep-dive (internal:139 external:44)
+2025-10-21 16:46:55,760 [INFO] block/captcha suspected at https://www.theguardian.com/commentisfree/2025/oct/21/antibiotic-resistance-farms-food-production-uk-eu, trying playwright render
+2025-10-21 16:46:59,016 [INFO] [5/30] Crawled: https://www.theguardian.com/commentisfree/2025/oct/21/antibiotic-resistance-farms-food-production-uk-eu (internal:132 external:45)
+2025-10-21 16:46:59,471 [INFO] block/captcha suspected at https://www.theguardian.com/society/ng-interactive/2025/oct/21/opioid-overdose-epidemic-brain-injuries, trying playwright render
+2025-10-21 16:47:12,979 [INFO] [6/30] Crawled: https://www.theguardian.com/society/ng-interactive/2025/oct/21/opioid-overdose-epidemic-brain-injuries (internal:127 external:42)
+2025-10-21 16:47:13,215 [INFO] block/captcha suspected at https://www.theguardian.com/film/2025/oct/21/terry-gilliam-life-of-brian-heath-ledger-faust, trying playwright render
+2025-10-21 16:47:16,783 [INFO] [7/30] Crawled: https://www.theguardian.com/film/2025/oct/21/terry-gilliam-life-of-brian-heath-ledger-faust (internal:139 external:33)
+2025-10-21 16:47:17,023 [INFO] block/captcha suspected at https://www.theguardian.com/lifeandstyle/2025/oct/21/fell-at-the-top-of-mountain-trekked-for-five-days-with-broken-spine-in-snowstorm, trying playwright render
+2025-10-21 16:47:20,632 [INFO] [8/30] Crawled: https://www.theguardian.com/lifeandstyle/2025/oct/21/fell-at-the-top-of-mountain-trekked-for-five-days-with-broken-spine-in-snowstorm (internal:139 external:31)
+2025-10-21 16:47:20,893 [INFO] block/captcha suspected at https://www.theguardian.com/news/2025/oct/21/i-knew-in-my-head-we-were-dying-the-last-voyage-of-the-scandies-rose, trying playwright render
+2025-10-21 16:47:24,072 [INFO] [9/30] Crawled: https://www.theguardian.com/news/2025/oct/21/i-knew-in-my-head-we-were-dying-the-last-voyage-of-the-scandies-rose (internal:121 external:33)
+2025-10-21 16:47:24,457 [INFO] block/captcha suspected at https://www.theguardian.com/preference/edition/int, trying playwright render
+2025-10-21 16:47:28,545 [INFO] [10/30] Crawled: https://www.theguardian.com/preference/edition/int (internal:304 external:31)
+2025-10-21 16:47:28,927 [INFO] block/captcha suspected at https://www.theguardian.com/preference/edition/uk, trying playwright render
+2025-10-21 16:47:33,405 [INFO] [11/30] Crawled: https://www.theguardian.com/preference/edition/uk (internal:390 external:41)
+2025-10-21 16:47:33,797 [INFO] block/captcha suspected at https://www.theguardian.com/preference/edition/us, trying playwright render
+2025-10-21 16:47:37,241 [INFO] [12/30] Crawled: https://www.theguardian.com/preference/edition/us (internal:299 external:29)
+2025-10-21 16:47:37,696 [INFO] block/captcha suspected at https://www.theguardian.com/preference/edition/au, trying playwright render
+2025-10-21 16:47:41,447 [INFO] [13/30] Crawled: https://www.theguardian.com/preference/edition/au (internal:319 external:26)
+2025-10-21 16:47:42,836 [INFO] block/captcha suspected at https://www.theguardian.com/preference/edition/eur, trying playwright render
+2025-10-21 16:47:47,740 [INFO] [14/30] Crawled: https://www.theguardian.com/preference/edition/eur (internal:317 external:31)
+2025-10-21 16:47:48,375 [INFO] block/captcha suspected at https://www.theguardian.com/, trying playwright render
+2025-10-21 16:47:51,939 [INFO] [15/30] Crawled: https://www.theguardian.com/ (internal:304 external:31)
+2025-10-21 16:47:52,237 [INFO] block/captcha suspected at https://www.theguardian.com/commentisfree, trying playwright render
+2025-10-21 16:47:55,390 [INFO] [16/30] Crawled: https://www.theguardian.com/commentisfree (internal:202 external:31)
+2025-10-21 16:47:55,706 [INFO] block/captcha suspected at https://www.theguardian.com/sport, trying playwright render
+2025-10-21 16:47:58,824 [INFO] [17/30] Crawled: https://www.theguardian.com/sport (internal:210 external:32)
+2025-10-21 16:47:59,185 [INFO] block/captcha suspected at https://www.theguardian.com/culture, trying playwright render
+2025-10-21 16:48:02,381 [INFO] [18/30] Crawled: https://www.theguardian.com/culture (internal:239 external:32)
+2025-10-21 16:48:02,738 [INFO] block/captcha suspected at https://www.theguardian.com/lifeandstyle, trying playwright render
+2025-10-21 16:48:06,911 [INFO] [19/30] Crawled: https://www.theguardian.com/lifeandstyle (internal:247 external:44)
+2025-10-21 16:48:07,147 [INFO] block/captcha suspected at https://www.theguardian.com/world, trying playwright render
+2025-10-21 16:48:10,405 [INFO] [20/30] Crawled: https://www.theguardian.com/world (internal:208 external:30)
+2025-10-21 16:48:10,765 [INFO] block/captcha suspected at https://www.theguardian.com/us-news/us-politics, trying playwright render
+2025-10-21 16:48:13,847 [INFO] [21/30] Crawled: https://www.theguardian.com/us-news/us-politics (internal:165 external:30)
+2025-10-21 16:48:14,156 [INFO] block/captcha suspected at https://www.theguardian.com/uk-news, trying playwright render
+2025-10-21 16:48:17,345 [INFO] [22/30] Crawled: https://www.theguardian.com/uk-news (internal:199 external:30)
+2025-10-21 16:48:17,578 [INFO] block/captcha suspected at https://www.theguardian.com/environment/climate-crisis, trying playwright render
+2025-10-21 16:48:20,511 [INFO] [23/30] Crawled: https://www.theguardian.com/environment/climate-crisis (internal:171 external:30)
+2025-10-21 16:48:20,725 [INFO] block/captcha suspected at https://www.theguardian.com/world/middleeast, trying playwright render
+2025-10-21 16:48:24,405 [INFO] [24/30] Crawled: https://www.theguardian.com/world/middleeast (internal:156 external:30)
+2025-10-21 16:48:24,613 [INFO] block/captcha suspected at https://www.theguardian.com/world/ukraine, trying playwright render
+2025-10-21 16:48:29,639 [INFO] [25/30] Crawled: https://www.theguardian.com/world/ukraine (internal:151 external:30)
+2025-10-21 16:48:30,765 [INFO] block/captcha suspected at https://www.theguardian.com/environment, trying playwright render
+2025-10-21 16:48:36,928 [INFO] [26/30] Crawled: https://www.theguardian.com/environment (internal:174 external:32)
+2025-10-21 16:48:37,322 [INFO] block/captcha suspected at https://www.theguardian.com/science, trying playwright render
+2025-10-21 16:48:40,507 [INFO] [27/30] Crawled: https://www.theguardian.com/science (internal:190 external:30)
+2025-10-21 16:48:40,753 [INFO] block/captcha suspected at https://www.theguardian.com/global-development, trying playwright render
+2025-10-21 16:48:44,308 [INFO] [28/30] Crawled: https://www.theguardian.com/global-development (internal:199 external:33)
+2025-10-21 16:48:44,565 [INFO] block/captcha suspected at https://www.theguardian.com/football, trying playwright render
+2025-10-21 16:48:47,497 [INFO] [29/30] Crawled: https://www.theguardian.com/football (internal:212 external:31)
+2025-10-21 16:48:47,837 [INFO] block/captcha suspected at https://www.theguardian.com/technology, trying playwright render
+2025-10-21 16:48:51,171 [INFO] [30/30] Crawled: https://www.theguardian.com/technology (internal:186 external:31)
+2025-10-21 16:48:51,175 [INFO] Saved results to outputs\orca_www_theguardian_com_1761061731.json
+2025-10-21 16:48:51,175 [INFO] ======================================================================
+2025-10-21 16:48:51,175 [INFO] Crawling start URL: https://www.webmarketing-seo.fr/
+2025-10-21 16:48:51,175 [INFO] Starting crawl: https://www.webmarketing-seo.fr/ (max_pages=30)
+2025-10-21 16:48:52,123 [INFO] block/captcha suspected at https://www.webmarketing-seo.fr/, trying playwright render
+2025-10-21 16:48:59,020 [INFO] [1/30] Crawled: https://www.webmarketing-seo.fr/ (internal:214 external:2)
+2025-10-21 16:49:02,944 [INFO] block/captcha suspected at https://www.webmarketing-seo.fr/politique-de-cookies-eu/#cmplz-manage-consent-container, trying playwright render
+2025-10-21 16:49:06,944 [INFO] [2/30] Crawled: https://www.webmarketing-seo.fr/politique-de-cookies-eu/#cmplz-manage-consent-container (internal:104 external:2)
+2025-10-21 16:49:07,145 [DEBUG] Skipping https://www.webmarketing-seo.fr/politique-de-cookies-eu/#cmplz-cookies-overview due robots
+2025-10-21 16:49:07,322 [DEBUG] Skipping https://www.webmarketing-seo.fr/politique-de-cookies-eu/#cmplz-tcf-wrapper due robots
+2025-10-21 16:49:07,501 [DEBUG] Skipping https://www.webmarketing-seo.fr/politique-de-cookies-eu/ due robots
+2025-10-21 16:49:07,687 [DEBUG] Skipping https://www.webmarketing-seo.fr/qui-sommes-nous/ due robots
+2025-10-21 16:49:07,855 [DEBUG] Skipping https://www.webmarketing-seo.fr/nos-services/ due robots
+2025-10-21 16:49:08,045 [DEBUG] Skipping https://www.webmarketing-seo.fr due robots
+2025-10-21 16:49:08,231 [DEBUG] Skipping https://www.webmarketing-seo.fr/lagence/ due robots
+2025-10-21 16:49:08,420 [DEBUG] Skipping https://www.webmarketing-seo.fr/agence-seo-en-tunisie/ due robots
+2025-10-21 16:49:08,605 [DEBUG] Skipping https://www.webmarketing-seo.fr/strategie-web/ due robots
+2025-10-21 16:49:08,789 [DEBUG] Skipping https://www.webmarketing-seo.fr/creation-de-site-internet/ due robots
+2025-10-21 16:49:08,975 [DEBUG] Skipping https://www.webmarketing-seo.fr/creation-de-site-internet/site-vitrine/ due robots
+2025-10-21 16:49:09,155 [DEBUG] Skipping https://www.webmarketing-seo.fr/creation-de-site-internet/e-commerce/ due robots
+2025-10-21 16:49:09,335 [DEBUG] Skipping https://www.webmarketing-seo.fr/creation-de-site-internet/site-responsive/ due robots
+2025-10-21 16:49:09,517 [DEBUG] Skipping https://www.webmarketing-seo.fr/la-redaction-de-contenus/ due robots
+2025-10-21 16:49:09,707 [DEBUG] Skipping https://www.webmarketing-seo.fr/le-referencement/ due robots
+2025-10-21 16:49:09,911 [DEBUG] Skipping https://www.webmarketing-seo.fr/audit-seo/ due robots
+2025-10-21 16:49:10,094 [DEBUG] Skipping https://www.webmarketing-seo.fr/netlinking/ due robots
+2025-10-21 16:49:10,281 [DEBUG] Skipping https://www.webmarketing-seo.fr/le-positionnement-dans-les-moteurs-de-recherche/ due robots
+2025-10-21 16:49:10,477 [DEBUG] Skipping https://www.webmarketing-seo.fr/les-campagnes-google-adwords/ due robots
+2025-10-21 16:49:10,661 [DEBUG] Skipping https://www.webmarketing-seo.fr/les-reseaux-sociaux/ due robots
+2025-10-21 16:49:10,853 [DEBUG] Skipping https://www.webmarketing-seo.fr/consultant-referencement-naturel/ due robots
+2025-10-21 16:49:11,041 [DEBUG] Skipping https://www.webmarketing-seo.fr/formation-referencement/ due robots
+2025-10-21 16:49:11,227 [DEBUG] Skipping https://www.webmarketing-seo.fr/web-design-creation-graphique/ due robots
+2025-10-21 16:49:11,418 [DEBUG] Skipping https://www.webmarketing-seo.fr/definitions/ due robots
+2025-10-21 16:49:11,608 [DEBUG] Skipping https://www.webmarketing-seo.fr/blog/ due robots
+2025-10-21 16:49:11,795 [DEBUG] Skipping https://www.webmarketing-seo.fr/contacter-notre-agence/ due robots
+2025-10-21 16:49:11,985 [DEBUG] Skipping https://www.webmarketing-seo.fr/article-kantar-lance-son-outil-de-mesure-de-la-visibilite-des-marques-dans-lia-generative/ due robots
+2025-10-21 16:49:12,176 [DEBUG] Skipping https://www.webmarketing-seo.fr/author/amineadmin/ due robots
+2025-10-21 16:49:12,357 [DEBUG] Skipping https://www.webmarketing-seo.fr/gemini-arrive-sur-chrome-quest-ce-que-cela-change/ due robots
+2025-10-21 16:49:12,547 [DEBUG] Skipping https://www.webmarketing-seo.fr/article-google-ne-sera-pas-demantele-mais-son-modele-doit-evoluer/ due robots
+2025-10-21 16:49:12,723 [DEBUG] Skipping https://www.webmarketing-seo.fr/c/chrome/ due robots
+2025-10-21 16:49:12,910 [DEBUG] Skipping https://www.webmarketing-seo.fr/article-maillage-interne-seo-meilleurs-plugins-pour-wordpress-automatiques-manuels/ due robots
+2025-10-21 16:49:13,103 [DEBUG] Skipping https://www.webmarketing-seo.fr/c/actualites/ due robots
+2025-10-21 16:49:13,286 [DEBUG] Skipping https://www.webmarketing-seo.fr/c/seo/ due robots
+2025-10-21 16:49:13,475 [DEBUG] Skipping https://www.webmarketing-seo.fr/c/wordpress/ due robots
+2025-10-21 16:49:13,647 [DEBUG] Skipping https://www.webmarketing-seo.fr/t/maillage-interne/ due robots
+2025-10-21 16:49:13,837 [DEBUG] Skipping https://www.webmarketing-seo.fr/article-urgent-vulnerabilite-wpbakery-injection-de-code-malveillant/ due robots
+2025-10-21 16:49:14,025 [DEBUG] Skipping https://www.webmarketing-seo.fr/t/faille-de-securite/ due robots
+2025-10-21 16:49:14,217 [DEBUG] Skipping https://www.webmarketing-seo.fr/article-lintelligence-artificielle-va-t-elle-enterrer-le-seo-plutot-le-faire-renaitre/ due robots
+2025-10-21 16:49:14,395 [DEBUG] Skipping https://www.webmarketing-seo.fr/c/bing/ due robots
+2025-10-21 16:49:14,585 [DEBUG] Skipping https://www.webmarketing-seo.fr/c/google/ due robots
+2025-10-21 16:49:14,777 [DEBUG] Skipping https://www.webmarketing-seo.fr/c/internet/ due robots
+2025-10-21 16:49:14,959 [DEBUG] Skipping https://www.webmarketing-seo.fr/t/intelligence-artificielle/ due robots
+2025-10-21 16:49:15,149 [DEBUG] Skipping https://www.webmarketing-seo.fr/les-10-meilleures-extension-seo-pour-chrome/ due robots
+2025-10-21 16:49:15,341 [DEBUG] Skipping https://www.webmarketing-seo.fr/les-meilleures-extensions-pour-firefox/ due robots
+2025-10-21 16:49:15,515 [DEBUG] Skipping https://www.webmarketing-seo.fr/article-site-web-comment-generer-plus-de-trafic/ due robots
+2025-10-21 16:49:15,715 [DEBUG] Skipping https://www.webmarketing-seo.fr/articles-les-meilleures-extensions-seo-pour-chrome-pour-lanalyse-concurrentielle-et-les-tendances/ due robots
+2025-10-21 16:49:15,892 [DEBUG] Skipping https://www.webmarketing-seo.fr/plan-du-site/ due robots
+2025-10-21 16:49:16,084 [DEBUG] Skipping https://www.webmarketing-seo.fr/contact/ due robots
+2025-10-21 16:49:16,263 [DEBUG] Skipping https://www.webmarketing-seo.fr/article-cookies-attention-consentement-des-internautes-desormais-obligatoire/ due robots
+2025-10-21 16:49:16,443 [DEBUG] Skipping https://www.webmarketing-seo.fr/politique-de-confidentialite/ due robots
+2025-10-21 16:49:16,631 [DEBUG] Skipping https://www.webmarketing-seo.fr/article-le-referencement-des-pages-ymyl/ due robots
+2025-10-21 16:49:16,814 [DEBUG] Skipping https://www.webmarketing-seo.fr/article-e-commerce-les-mots-a-privilegier-pour-vendre/ due robots
+2025-10-21 16:49:17,012 [DEBUG] Skipping https://www.webmarketing-seo.fr/p-creation-de-site-internet-limportance-du-referencement-naturel/ due robots
+2025-10-21 16:49:17,202 [DEBUG] Skipping https://www.webmarketing-seo.fr/p-x-realisations-en-motion-design-pour-les-entreprises/ due robots
+2025-10-21 16:49:17,204 [INFO] Saved results to outputs\orca_www_webmarketing_seo_fr_1761061757.json
+2025-10-21 16:49:17,208 [INFO] All done.
