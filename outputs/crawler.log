@@ -556,3 +556,4 @@
 2025-10-21 16:49:17,202 [DEBUG] Skipping https://www.webmarketing-seo.fr/p-x-realisations-en-motion-design-pour-les-entreprises/ due robots
 2025-10-21 16:49:17,204 [INFO] Saved results to outputs\orca_www_webmarketing_seo_fr_1761061757.json
 2025-10-21 16:49:17,208 [INFO] All done.
+2025-10-30 11:53:26,493 [ERROR] No valid URLs provided. Exiting.

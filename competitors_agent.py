@@ -102,13 +102,17 @@ class CompetitorTier(Enum):
 
 
 # ==================== AI SERVICE ====================
+# ==================== AI SERVICE ====================
 class AIService:
     """Centralized AI operations using Groq"""
     
     def __init__(self, api_key: str):
+        # Remove any proxy-related parameters that might be causing issues
         self.client = OpenAI(
             api_key=api_key,
-            base_url="https://api.groq.com/openai/v1"
+            base_url="https://api.groq.com/openai/v1",
+            timeout=30.0,  # Add timeout instead
+            max_retries=2   # Add retries instead
         )
         self.model = "llama-3.3-70b-versatile"
     
@@ -260,12 +264,10 @@ Return JSON: {{"score": <int>, "is_competitor": <bool>, "reasoning": "<brief exp
                     'is_competitor': bool(result.get('is_competitor', True)),
                     'reasoning': result.get('reasoning', 'Analysis completed')[:200]
                 }
-        except Exception:
-            pass
+        except Exception as e:
+            print(f"⚠️  AI comparison failed: {e}")
         
         return {'score': 50, 'is_competitor': True, 'reasoning': 'Analysis unavailable'}
-
-
 # ==================== COMPETITOR FINDER ====================
 class CompetitorFinder:
     """Main competitor discovery engine"""
