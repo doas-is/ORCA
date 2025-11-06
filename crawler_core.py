@@ -188,6 +188,54 @@ def fetch_html(url, use_playwright_if_blocked=True):
         return fetch_with_playwright(url)
     return text
 
+def extract_company_name(soup, url):
+    """Extract company name from various sources with priority order"""
+    # Try meta tags first
+    meta_name = soup.find("meta", attrs={"property": "og:site_name"})
+    if meta_name and meta_name.get("content"):
+        name = meta_name.get("content").strip()
+        if name and len(name) > 2 and name.lower() not in ['home', 'homepage', 'www']:
+            return name
+    
+    # Try title tag
+    if soup.title and soup.title.string:
+        title = soup.title.string.strip()
+        # Remove common suffixes
+        for suffix in [' - Home', ' | Home', ' - Homepage', ' | Homepage', ' - Official Site', ' | Official Site']:
+            if suffix.lower() in title.lower():
+                title = title[:title.lower().index(suffix.lower())].strip()
+        # Clean up title
+        parts = [p.strip() for p in re.split(r'[|\-–—]', title) if p.strip()]
+        if parts and len(parts[0]) > 2 and parts[0].lower() not in ['home', 'homepage', 'www', 'welcome']:
+            return parts[0]
+    
+    # Try h1 tags
+    h1_tags = soup.find_all("h1")
+    for h1 in h1_tags:
+        text = h1.get_text(strip=True)
+        if text and len(text) > 2 and len(text) < 100 and text.lower() not in ['home', 'homepage', 'welcome', 'www']:
+            return text
+    
+    # Try logo alt text
+    logo_selectors = ['img[alt*="logo"]', 'img.logo', 'img#logo', '.logo img', '#logo img']
+    for selector in logo_selectors:
+        try:
+            logo = soup.select_one(selector)
+            if logo and logo.get('alt'):
+                alt = logo.get('alt').strip()
+                if alt and len(alt) > 2 and 'logo' not in alt.lower():
+                    return alt
+        except:
+            pass
+    
+    # Last resort: extract from domain name
+    domain = urlparse(url).netloc
+    # Remove www and TLD
+    name = re.sub(r'^www\.', '', domain)
+    name = re.sub(r'\.(com|org|net|io|co|ai)$', '', name)
+    # Capitalize first letter of each word
+    return ' '.join(word.capitalize() for word in name.split('.'))
+
 # Parsers / extractors
 def extract_basic_seo(soup, url):
     def get_meta(name):
@@ -213,8 +261,13 @@ def extract_basic_seo(soup, url):
         links.append(urljoin(url, href))
     # images
     imgs = [urljoin(url, img.get("src")) for img in soup.find_all("img") if img.get("src")]
+    
+    # Extract company name
+    company_name = extract_company_name(soup, url)
+    
     return {
         "title": title,
+        "company_name": company_name,
         "meta_description": meta_desc,
         "canonical": canonical,
         "h1": h1_tags,
@@ -312,6 +365,7 @@ def crawl_domain(start_url, max_pages=DEFAULT_MAX_PAGES, obey_robots=True):
     queue = deque([start_url])
     results = []
     pages_crawled = 0
+    company_name = None
 
     while queue and pages_crawled < max_pages:
         url = queue.popleft()
@@ -335,6 +389,12 @@ def crawl_domain(start_url, max_pages=DEFAULT_MAX_PAGES, obey_robots=True):
 
         soup = BeautifulSoup(html, "html.parser")
         seo = extract_basic_seo(soup, url)
+        
+        # Capture company name from homepage or first successful page
+        if not company_name and seo.get("company_name"):
+            company_name = seo.get("company_name")
+            logger.info(f"Company name identified: {company_name}")
+        
         body_text = soup.get_text(separator=" ", strip=True)[:3000]
         business = detect_business_signals(body_text)
 
@@ -357,6 +417,7 @@ def crawl_domain(start_url, max_pages=DEFAULT_MAX_PAGES, obey_robots=True):
             "url": url,
             "status_time": datetime.utcnow().isoformat() + "Z",
             "title": seo.get("title"),
+            "company_name": seo.get("company_name"),
             "meta_description": seo.get("meta_description"),
             "h1": seo.get("h1"),
             "canonical": seo.get("canonical"),
@@ -388,6 +449,7 @@ def crawl_domain(start_url, max_pages=DEFAULT_MAX_PAGES, obey_robots=True):
     domain_summary = {
         "start_url": start_url,
         "domain": domain,
+        "company_name": company_name,
         "pages_crawled": len(results),
         "top_titles": [r.get("title") for r in results if r.get("title")][:5],
         "top_h1s": sum([r.get("h1") for r in results if r.get("h1")], [])[:10],

@@ -70,13 +70,22 @@ class CrawlerService:
         try:
             domain = crawler_result.get('domain', '')
             
-            # Extract company name from domain or top titles
-            company_name = domain.split('.')[0].title()
-            if crawler_result.get('top_titles'):
-                # Try to extract cleaner name from first title
-                first_title = crawler_result['top_titles'][0]
-                if first_title and len(first_title) < 50:
-                    company_name = first_title.split('|')[0].split('-')[0].strip()
+            # Extract company name - NOW USING THE NEW company_name FIELD!
+            company_name = crawler_result.get('company_name')
+            
+            # Fallback logic if company_name is not available
+            if not company_name or company_name.lower() in ['www', 'home', 'homepage']:
+                # Try to extract from top titles
+                if crawler_result.get('top_titles'):
+                    first_title = crawler_result['top_titles'][0]
+                    if first_title and len(first_title) < 50:
+                        company_name = first_title.split('|')[0].split('-')[0].strip()
+                
+                # Last resort: use domain
+                if not company_name or company_name.lower() in ['www', 'home', 'homepage']:
+                    company_name = domain.split('.')[0].title()
+            
+            logger.info(f"[TRANSFORM] Extracted company name: {company_name}")
             
             # Build description from available data
             description_parts = []
@@ -142,6 +151,7 @@ class CrawlerService:
             }
             
             logger.info(f"[TRANSFORM] Successfully transformed data for {domain}")
+            logger.info(f"[TRANSFORM] Final company name: {company_name}")
             return transformed_data
             
         except Exception as e:
