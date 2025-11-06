@@ -14,6 +14,25 @@ api_bp = Blueprint('api', __name__)
 crawler_service = CrawlerService()
 competitor_service = CompetitorService()
 
+# Explicit OPTIONS handlers for preflight requests
+@api_bp.route('/analyze-url', methods=['OPTIONS'])
+def analyze_url_options():
+    """Handle preflight request for analyze-url"""
+    response = jsonify({'status': 'ok'})
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+    response.headers.add('Access-Control-Allow-Methods', 'POST,OPTIONS')
+    return response, 204
+
+@api_bp.route('/discover-competitors', methods=['OPTIONS'])
+def discover_competitors_options():
+    """Handle preflight request for discover-competitors"""
+    response = jsonify({'status': 'ok'})
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+    response.headers.add('Access-Control-Allow-Methods', 'POST,OPTIONS')
+    return response, 204
+
 @api_bp.route('/analyze-url', methods=['POST'])
 def analyze_url():
     """

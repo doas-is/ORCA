@@ -2945,3 +2945,95 @@ TypeError: Client.__init__() got an unexpected keyword argument 'proxies'
 2025-10-31 00:27:23,075 [INFO] [SUCCESS] Found 10 competitors
 2025-10-31 00:27:23,117 [INFO] ✅ Discovered 10 competitors
 2025-10-31 00:27:23,129 [INFO] 127.0.0.1 - - [31/Oct/2025 00:27:23] "POST /api/discover-competitors HTTP/1.1" 200 -
+2025-11-06 12:37:20,978 [INFO] ORCA API Server initialized successfully
+2025-11-06 12:37:21,152 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.122:5000
+2025-11-06 12:37:21,153 [INFO] [33mPress CTRL+C to quit[0m
+2025-11-06 12:37:21,167 [INFO]  * Restarting with stat
+2025-11-06 12:37:23,504 [INFO] ORCA API Server initialized successfully
+2025-11-06 12:37:23,532 [WARNING]  * Debugger is active!
+2025-11-06 12:37:23,541 [INFO]  * Debugger PIN: 544-037-881
+2025-11-06 12:39:58,517 [INFO] 127.0.0.1 - - [06/Nov/2025 12:39:58] "[33mOPTIONS /api/analyze HTTP/1.1[0m" 404 -
+2025-11-06 12:40:04,661 [INFO] 127.0.0.1 - - [06/Nov/2025 12:40:04] "[33mOPTIONS /api/analyze HTTP/1.1[0m" 404 -
+2025-11-06 12:48:08,046 [INFO] 127.0.0.1 - - [06/Nov/2025 12:48:08] "[33mOPTIONS /api/analyze HTTP/1.1[0m" 404 -
+2025-11-06 12:52:37,766 [INFO]  * Detected change in 'C:\\Users\\Helal\\OneDrive\\Bureau\\ORCA\\api\\app.py', reloading
+2025-11-06 12:52:38,464 [INFO]  * Restarting with stat
+2025-11-06 13:08:23,105 [INFO] ORCA API Server initialized successfully
+2025-11-06 13:08:23,186 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.122:5000
+2025-11-06 13:08:23,186 [INFO] [33mPress CTRL+C to quit[0m
+2025-11-06 13:08:23,192 [INFO]  * Restarting with stat
+2025-11-06 13:08:25,988 [INFO] ORCA API Server initialized successfully
+2025-11-06 13:08:26,070 [WARNING]  * Debugger is active!
+2025-11-06 13:08:26,087 [INFO]  * Debugger PIN: 544-037-881
+2025-11-06 13:08:42,331 [INFO] 127.0.0.1 - - [06/Nov/2025 13:08:42] "[35m[1mOPTIONS /api/analyze-url HTTP/1.1[0m" 204 -
+2025-11-06 13:08:42,577 [INFO] [ANALYZE] Starting URL analysis: https://travelperk.com
+2025-11-06 13:08:42,578 [INFO] [CRAWLER] Crawling https://travelperk.com (max 30 pages)
+2025-11-06 13:08:42,596 [INFO] Starting crawl: https://travelperk.com (max_pages=30)
+2025-11-06 13:08:55,583 [INFO] [1/30] Crawled: https://travelperk.com (internal:186 external:78)
+2025-11-06 13:08:57,446 [INFO] [2/30] Crawled: https://travelperk.com/meet-perk (internal:138 external:13)
+2025-11-06 13:08:59,048 [INFO] [3/30] Crawled: https://travelperk.com/ (internal:186 external:78)
+2025-11-06 13:09:00,863 [INFO] [4/30] Crawled: https://travelperk.com/customers/ (internal:138 external:28)
+2025-11-06 13:09:02,530 [INFO] [5/30] Crawled: https://travelperk.com/pricing/ (internal:152 external:14)
+2025-11-06 13:09:03,430 [INFO] [6/30] Crawled: https://travelperk.com/travel-solutions/marketplace/ (internal:138 external:15)
+2025-11-06 13:09:05,114 [INFO] [7/30] Crawled: https://travelperk.com/demo-request (internal:127 external:30)
+2025-11-06 13:09:07,882 [INFO] [8/30] Crawled: https://travelperk.com/platform-overview?tab=Travel (internal:138 external:14)
+2025-11-06 13:09:09,512 [INFO] [9/30] Crawled: https://travelperk.com/platform-overview?tab=Spend (internal:138 external:14)
+2025-11-06 13:09:10,812 [INFO] [10/30] Crawled: https://travelperk.com/expense-management-nam/ (internal:128 external:14)
+2025-11-06 13:09:13,147 [INFO] [11/30] Crawled: https://travelperk.com/platform-overview?tab=Events (internal:138 external:14)
+2025-11-06 13:09:14,511 [INFO] [12/30] Crawled: https://travelperk.com/amtrav/ (internal:8 external:2)
+2025-11-06 13:09:15,885 [INFO] [13/30] Crawled: https://travelperk.com/travel-solutions/corporate-flights/ (internal:123 external:15)
+2025-11-06 13:09:17,545 [INFO] [14/30] Crawled: https://travelperk.com/travel-solutions/corporate-rail/ (internal:123 external:16)
+2025-11-06 13:09:19,040 [INFO] [15/30] Crawled: https://travelperk.com/travel-solutions/corporate-accommodation/ (internal:123 external:19)
+2025-11-06 13:09:20,613 [INFO] [16/30] Crawled: https://travelperk.com/travel-solutions/corporate-car-rental/ (internal:123 external:16)
+2025-11-06 13:09:29,056 [INFO] [17/30] Crawled: https://travelperk.com/travel-solutions/travel-safety-advice/ (internal:375 external:12)
+2025-11-06 13:09:33,453 [INFO] [18/30] Crawled: https://travelperk.com/travel-solutions/policies-approvals/ (internal:124 external:15)
+2025-11-06 13:09:38,861 [INFO] [19/30] Crawled: https://travelperk.com/travel-solutions/duty-of-care/ (internal:123 external:14)
+2025-11-06 13:09:47,005 [INFO] [20/30] Crawled: https://travelperk.com/travel-solutions/centralized-invoicing/ (internal:123 external:16)
+2025-11-06 13:09:52,299 [INFO] [21/30] Crawled: https://travelperk.com/travel-solutions/vat/ (internal:123 external:18)
+2025-11-06 13:09:58,745 [INFO] [22/30] Crawled: https://travelperk.com/travel-solutions/travel-management-reporting/ (internal:123 external:17)
+2025-11-06 13:10:03,058 [INFO] [23/30] Crawled: https://travelperk.com/travel-solutions/corporate-travel-assistance/ (internal:123 external:16)
+2025-11-06 13:10:05,606 [INFO] [24/30] Crawled: https://travelperk.com/travel-solutions/flexitravel/ (internal:135 external:18)
+2025-11-06 13:10:07,455 [INFO] [25/30] Crawled: https://travelperk.com/travel-solutions/green-trip/ (internal:124 external:15)
+2025-11-06 13:10:09,218 [INFO] [26/30] Crawled: https://travelperk.com/travel-solutions/executive-experience/ (internal:124 external:15)
+2025-11-06 13:10:11,398 [INFO] [27/30] Crawled: https://travelperk.com/travel-solutions/medical-baggage-insurance (internal:120 external:16)
+2025-11-06 13:10:14,328 [INFO] [28/30] Crawled: https://travelperk.com/spend-solutions/spend-management-software/ (internal:129 external:15)
+2025-11-06 13:10:15,879 [INFO] [29/30] Crawled: https://travelperk.com/spend-solutions/europe-expense-integrations/ (internal:124 external:16)
+2025-11-06 13:10:17,873 [INFO] [30/30] Crawled: https://travelperk.com/spend-solutions/workflow-designer/ (internal:123 external:14)
+2025-11-06 13:10:17,880 [INFO] [CRAWLER] Raw result keys: dict_keys(['start_url', 'domain', 'pages_crawled', 'top_titles', 'top_h1s', 'likely_niches', 'partner_indicators', 'client_indicators', 'partner_name_matches', 'client_name_matches', 'sample_pages', 'timestamp'])
+2025-11-06 13:10:17,886 [INFO] [TRANSFORM] Successfully transformed data for travelperk.com
+2025-11-06 13:10:17,888 [INFO] [SUCCESS] Crawler analysis complete: travelperk.com
+2025-11-06 13:10:17,890 [INFO] [CRAWLER] Transformed data keys: dict_keys(['domain', 'start_url', 'company', 'evidence', 'metadata', 'social'])
+2025-11-06 13:10:17,892 [INFO] ✅ Analysis complete for https://travelperk.com
+2025-11-06 13:10:17,896 [INFO] 127.0.0.1 - - [06/Nov/2025 13:10:17] "POST /api/analyze-url HTTP/1.1" 200 -
+2025-11-06 13:10:31,268 [INFO] 127.0.0.1 - - [06/Nov/2025 13:10:31] "[35m[1mOPTIONS /api/discover-competitors HTTP/1.1[0m" 204 -
+2025-11-06 13:10:31,369 [INFO] 🔍 Starting competitor discovery for travelperk.com
+2025-11-06 13:10:31,376 [INFO] [DISCOVER] Validating company data...
+2025-11-06 13:10:31,387 [INFO] [VALIDATE] ✅ Company data structure is valid
+2025-11-06 13:10:31,400 [INFO] [DISCOVER] Starting competitor discovery for travelperk.com
+2025-11-06 13:10:31,415 [INFO] [DISCOVER] Company name: Travelperk
+2025-11-06 13:10:31,427 [INFO] [DISCOVER] Description length: 330
+2025-11-06 13:10:31,430 [INFO] [DISCOVER] Creating CompetitorFinder instance...
+2025-11-06 13:10:38,028 [INFO] [DISCOVER] CompetitorFinder created successfully
+2025-11-06 13:10:38,031 [INFO] [DISCOVER] Calling finder.discover()...
+2025-11-06 13:10:47,180 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-06 13:10:47,646 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-06 13:10:58,715 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-06 13:11:08,382 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-06 13:11:16,347 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-06 13:11:29,875 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-06 13:11:40,349 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-06 13:11:49,724 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-06 13:12:08,029 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-06 13:12:17,530 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-06 13:12:27,331 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-06 13:12:37,392 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-06 13:12:50,592 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-06 13:13:22,514 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-06 13:13:22,526 [INFO] [SUCCESS] Found 10 competitors
+2025-11-06 13:13:22,606 [INFO] ✅ Discovered 10 competitors
+2025-11-06 13:13:22,620 [INFO] 127.0.0.1 - - [06/Nov/2025 13:13:22] "POST /api/discover-competitors HTTP/1.1" 200 -
