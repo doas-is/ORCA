@@ -1,0 +1,335 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ORCA Design System - Underwater Theme */
+
+@layer base {
+  :root {
+    /* Light Mode - Clean and Vibrant */
+    --background-start: 200 30% 95%;
+    --background-mid: 200 25% 92%;
+    --background-end: 200 30% 88%;
+    
+    --foreground: 220 20% 20%;
+    --foreground-secondary: 220 15% 35%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 20% 20%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 20% 20%;
+
+    --primary: 187 85% 42%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 16 90% 58%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 200 20% 85%;
+    --muted-foreground: 220 15% 45%;
+
+    --accent: 187 85% 42%;
+    --accent-foreground: 0 0% 100%;
+
+    --kelp: 170 75% 48%;
+    --kelp-foreground: 0 0% 100%;
+    
+    --confidence-high: 0 85% 60%;
+    --confidence-medium: 38 92% 58%;
+    
+    --destructive: 0 85% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 200 20% 80%;
+    --input: 200 20% 90%;
+    --ring: 187 85% 50%;
+
+    --radius: 0.75rem;
+    
+    /* Logo colors */
+    --logo: 187 85% 42%;
+    
+    /* Glass effect */
+    --glass-bg: 0 0% 100%;
+    --glass-opacity: 0.8;
+    
+    /* Bubble colors */
+    --bubble-color: 187 80% 55%;
+    --bubble-glow: 16 90% 65%;
+  }
+
+  .dark {
+    /* Dark Mode - Deep Ocean with consistent teal */
+    --background-start: 220 50% 30%;
+    --background-mid: 220 45% 22%;
+    --background-end: 220 50% 15%;
+    
+    --foreground: 0 0% 100%;
+    --foreground-secondary: 210 25% 80%;
+
+    --card: 220 40% 18%;
+    --card-foreground: 0 0% 100%;
+
+    --popover: 220 40% 18%;
+    --popover-foreground: 0 0% 100%;
+
+    --primary: 187 70% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 35% 22%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 220 30% 25%;
+    --muted-foreground: 210 15% 70%;
+
+    --accent: 187 70% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    --kelp: 187 70% 50%;
+    --kelp-foreground: 0 0% 100%;
+    
+    --confidence-high: 0 85% 60%;
+    --confidence-medium: 38 92% 58%;
+
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 30% 30%;
+    --input: 220 35% 15%;
+    --ring: 187 70% 50%;
+    
+    /* Logo colors */
+    --logo: 187 70% 50%;
+    
+    /* Glass effect */
+    --glass-bg: 220 40% 20%;
+    --glass-opacity: 0.6;
+    
+    /* Bubble colors */
+    --bubble-color: 187 70% 50%;
+    --bubble-glow: 187 70% 50%;
+  }
+  
+  * {
+    transition: background-color 600ms ease-in-out, 
+                color 600ms ease-in-out, 
+                border-color 600ms ease-in-out,
+                box-shadow 600ms ease-in-out;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply text-foreground;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+  
+  #root {
+    min-height: 100vh;
+  }
+}
+
+@layer utilities {
+  .ocean-gradient {
+    background: linear-gradient(
+      180deg,
+      hsl(var(--background-start)) 0%,
+      hsl(var(--background-mid)) 50%,
+      hsl(var(--background-end)) 100%
+    );
+    min-height: 100vh;
+    transition: filter 600ms ease-in-out;
+  }
+  
+  .glass-card {
+    background: hsla(var(--glass-bg), var(--glass-opacity));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid hsl(var(--border));
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+  }
+  
+  .navbar-glass {
+    background: hsla(var(--glass-bg), 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid hsl(var(--border) / 0.5);
+    box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.05);
+  }
+  
+  .bubble {
+    position: absolute;
+    background: radial-gradient(circle at 30% 30%, 
+      hsla(var(--bubble-color), 0.3), 
+      hsla(var(--bubble-color), 0.1));
+    border-radius: 50%;
+    filter: blur(1px);
+    box-shadow: 0 0 10px hsla(var(--bubble-glow), 0.2),
+                inset 0 0 5px hsla(var(--bubble-color), 0.2);
+    pointer-events: none;
+  }
+  
+  .hover-lift {
+    transition: transform 200ms ease-out, box-shadow 200ms ease-out;
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px 0 rgba(0, 217, 255, 0.2);
+  }
+  
+  .glow-effect {
+    position: relative;
+  }
+  
+  .glow-effect::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, 
+      hsla(var(--cyan-bright), 0.4), 
+      hsla(var(--teal), 0.4));
+    opacity: 0;
+    transition: opacity 300ms ease-out;
+    z-index: -1;
+    filter: blur(20px);
+  }
+  
+  .glow-effect:hover::before {
+    opacity: 1;
+  }
+}
+/* Toast animations */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.toast-slide-up {
+  animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Navbar active button with 3D extrusion effect */
+.navbar-active-button {
+  position: relative;
+  transform: translateY(-1px);
+}
+
+.navbar-active-button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.2) 0%, 
+    transparent 50%, 
+    rgba(0, 0, 0, 0.1) 100%
+  );
+  pointer-events: none;
+}
+
+.navbar-active-button::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(to bottom, 
+    rgba(255, 255, 255, 0.1), 
+    transparent
+  );
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Scale in animation for checkmarks */
+@keyframes scaleIn {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Fade in animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Hover lift effect */
+.hover-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Glass card improvements */
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  .glass-card {
+    background: rgba(255, 255, 255, 0.03);
+  }
+  
+  .glass-card:hover {
+    background: rgba(255, 255, 255, 0.06);
+  }
+}
