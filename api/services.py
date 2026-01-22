@@ -1,5 +1,5 @@
 """
-Service Layer - Wraps Python agents for API use
+Enhanced Service Layer with better error handling
 """
 import sys
 import os
@@ -8,10 +8,9 @@ import logging
 from typing import Dict, Optional
 import traceback
 
-# Add parent directory to path to import agents
+# Add parent directory to path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-# Import after path is set
 import crawler_core
 from competitors_agent import CompetitorFinder, Config as CompetitorConfig
 
@@ -19,86 +18,68 @@ logger = logging.getLogger(__name__)
 
 
 class CrawlerService:
-    """Service wrapper for crawler_core.py"""
+    """Enhanced crawler service"""
     
     def analyze_url(self, url: str, max_pages: int = 30) -> Optional[Dict]:
-        """
-        Analyze a URL using crawler_core
-        
-        Args:
-            url: The URL to analyze
-            max_pages: Maximum pages to crawl
-            
-        Returns:
-            Dictionary with analysis results or None on failure
-        """
+        """Analyze URL with enhanced error handling"""
         try:
-            logger.info(f"[CRAWLER] Crawling {url} (max {max_pages} pages)")
+            logger.info(f"[CRAWLER] Starting crawl: {url} (max {max_pages} pages)")
+            
+            # Validate URL
+            if not url or not url.startswith('http'):
+                raise ValueError("Invalid URL format")
             
             # Run crawler
             result = crawler_core.crawl_domain(url, max_pages=max_pages, obey_robots=True)
             
             if not result:
                 logger.error(f"Crawler returned no results for {url}")
-                return None
+                raise Exception("Crawler failed to fetch data")
             
-            logger.info(f"[CRAWLER] Raw result keys: {result.keys()}")
+            logger.info(f"[CRAWLER] Pages crawled: {result.get('pages_crawled', 0)}")
+            logger.info(f"[CRAWLER] Company name: {result.get('company_name', 'Unknown')}")
             
-            # Transform crawler output to expected format
+            # Transform to API format
             company_data = self._transform_crawler_output(result)
             
-            logger.info(f"[SUCCESS] Crawler analysis complete: {company_data.get('domain')}")
-            logger.info(f"[CRAWLER] Transformed data keys: {company_data.keys()}")
-            
+            logger.info(f"[SUCCESS] Analysis complete for {company_data.get('domain')}")
             return company_data
             
         except Exception as e:
-            logger.error(f"Error in crawler service: {e}")
+            logger.error(f"[ERROR] Crawler service failed: {e}")
             logger.error(traceback.format_exc())
-            return None
+            raise
     
     def _transform_crawler_output(self, crawler_result: Dict) -> Dict:
-        """
-        Transform crawler_core output to format expected by competitors_agent
-        
-        Args:
-            crawler_result: Raw output from crawl_domain()
-            
-        Returns:
-            Transformed data compatible with CompetitorFinder
-        """
+        """Transform crawler output to API format"""
         try:
             domain = crawler_result.get('domain', '')
             
-            # Extract company name - NOW USING THE NEW company_name FIELD!
-            company_name = crawler_result.get('company_name')
+            # Extract company name - NOW USES THE FIXED company_name FIELD
+            company_name = crawler_result.get('company_name', 'Unknown')
             
-            # Fallback logic if company_name is not available
-            if not company_name or company_name.lower() in ['www', 'home', 'homepage']:
-                # Try to extract from top titles
+            # Additional validation
+            if not company_name or company_name == 'Unknown' or len(company_name) < 2:
+                # Try from top titles
                 if crawler_result.get('top_titles'):
                     first_title = crawler_result['top_titles'][0]
-                    if first_title and len(first_title) < 50:
+                    if first_title:
                         company_name = first_title.split('|')[0].split('-')[0].strip()
                 
-                # Last resort: use domain
-                if not company_name or company_name.lower() in ['www', 'home', 'homepage']:
+                # Last resort: domain
+                if not company_name or len(company_name) < 2:
                     company_name = domain.split('.')[0].title()
             
-            logger.info(f"[TRANSFORM] Extracted company name: {company_name}")
+            logger.info(f"[TRANSFORM] Company name: {company_name}")
             
-            # Build description from available data
+            # Build description
             description_parts = []
             
-            # Add niche terms
+            # Add niches
             if crawler_result.get('likely_niches'):
-                description_parts.append(f"Specializes in {', '.join(crawler_result['likely_niches'][:3])}")
-            
-            # Add H1s for context
-            if crawler_result.get('top_h1s'):
-                h1_text = ' '.join(crawler_result['top_h1s'][:3])
-                if h1_text and len(h1_text) > 20:
-                    description_parts.append(h1_text)
+                niches = crawler_result['likely_niches'][:3]
+                if niches:
+                    description_parts.append(f"Specializes in {', '.join(niches)}")
             
             # Add meta descriptions from sample pages
             sample_pages = crawler_result.get('sample_pages', [])
@@ -108,9 +89,17 @@ class CrawlerService:
                     description_parts.append(meta_desc)
                     break
             
-            description = '. '.join(description_parts)[:500] if description_parts else "Business services provider"
+            # Add H1s if no meta description
+            if not description_parts and crawler_result.get('top_h1s'):
+                h1_text = ' '.join(crawler_result['top_h1s'][:2])
+                if h1_text and len(h1_text) > 20:
+                    description_parts.append(h1_text)
             
-            # Build evidence array from sample pages
+            description = '. '.join(description_parts)[:500] if description_parts else "Business services and solutions provider"
+            
+            logger.info(f"[TRANSFORM] Description length: {len(description)}")
+            
+            # Build evidence
             evidence = []
             for page in sample_pages[:5]:
                 if page.get('snippet'):
@@ -121,16 +110,23 @@ class CrawlerService:
                     })
             
             # Detect sector
-            sector = "Technology"
             niches_lower = [n.lower() for n in crawler_result.get('likely_niches', [])]
-            if any(term in niches_lower for term in ['saas', 'software', 'platform']):
-                sector = "SaaS"
-            elif any(term in niches_lower for term in ['fintech', 'financial']):
-                sector = "FinTech"
-            elif any(term in niches_lower for term in ['health', 'medical']):
-                sector = "Healthcare"
+            desc_lower = description.lower()
             
-            # Build final structure - ENSURE all required fields are present
+            sector = "Technology"
+            if any(term in niches_lower or term in desc_lower for term in ['saas', 'software', 'platform']):
+                sector = "SaaS"
+            elif any(term in niches_lower or term in desc_lower for term in ['fintech', 'financial', 'banking']):
+                sector = "FinTech"
+            elif any(term in niches_lower or term in desc_lower for term in ['health', 'medical', 'healthcare']):
+                sector = "Healthcare"
+            elif any(term in niches_lower or term in desc_lower for term in ['travel', 'booking']):
+                sector = "Travel"
+            
+            # Determine niche
+            niche = ', '.join(crawler_result.get('likely_niches', [])[:3]) if crawler_result.get('likely_niches') else 'Business Services'
+            
+            # Build final structure
             transformed_data = {
                 'domain': domain,
                 'start_url': crawler_result.get('start_url', ''),
@@ -138,7 +134,7 @@ class CrawlerService:
                     'name': company_name,
                     'description': description,
                     'sector': sector,
-                    'niche': ', '.join(crawler_result.get('likely_niches', [])[:3]) if crawler_result.get('likely_niches') else 'Business Services'
+                    'niche': niche
                 },
                 'evidence': evidence,
                 'metadata': {
@@ -147,93 +143,97 @@ class CrawlerService:
                     'partner_indicators': crawler_result.get('partner_indicators', []),
                     'client_indicators': crawler_result.get('client_indicators', [])
                 },
-                'social': {},  # Could be populated from crawler if available
+                'social': {},
             }
             
-            logger.info(f"[TRANSFORM] Successfully transformed data for {domain}")
-            logger.info(f"[TRANSFORM] Final company name: {company_name}")
+            logger.info(f"[TRANSFORM] ✅ Successfully transformed data")
+            logger.info(f"[TRANSFORM] Final: {company_name} | {sector} | {niche}")
+            
             return transformed_data
             
         except Exception as e:
-            logger.error(f"Error transforming crawler output: {e}")
+            logger.error(f"[ERROR] Transform failed: {e}")
             logger.error(traceback.format_exc())
             raise
 
 
 class CompetitorService:
-    """Service wrapper for competitors_agent.py"""
+    """Enhanced competitor service"""
     
     def __init__(self):
-        """Initialize competitor service with configuration"""
+        """Initialize with config validation"""
         try:
-            logger.info("[INIT] Initializing CompetitorService...")
+            logger.info("[INIT] Loading competitor configuration...")
             self.config = CompetitorConfig.from_env()
-            logger.info("[INIT] Competitor service initialized with env config")
+            logger.info("[INIT] ✅ Competitor service ready")
         except Exception as e:
-            logger.error(f"❌ Failed to initialize competitor config: {e}")
-            logger.error(traceback.format_exc())
+            logger.error(f"[ERROR] Failed to initialize: {e}")
             raise
     
     def discover(self, company_data: Dict, target: int = 10) -> Optional[Dict]:
-        """
-        Discover competitors using competitors_agent
-        
-        Args:
-            company_data: Company data from crawler service
-            target: Number of competitors to find
-            
-        Returns:
-            Dictionary with competitor discovery results or None on failure
-        """
+        """Discover competitors with enhanced validation"""
         try:
-            # Validate company_data structure
-            logger.info(f"[DISCOVER] Validating company data...")
+            # Validate input
+            logger.info("[DISCOVER] Validating company data...")
             self._validate_company_data(company_data)
             
-            logger.info(f"[DISCOVER] Starting competitor discovery for {company_data.get('domain')}")
-            logger.info(f"[DISCOVER] Company name: {company_data.get('company', {}).get('name')}")
-            logger.info(f"[DISCOVER] Description length: {len(company_data.get('company', {}).get('description', ''))}")
+            company_name = company_data.get('company', {}).get('name', 'Unknown')
+            domain = company_data.get('domain', 'unknown')
             
-            # Create finder instance - THIS IS WHERE THE ERROR LIKELY OCCURS
-            logger.info(f"[DISCOVER] Creating CompetitorFinder instance...")
-            try:
-                finder = CompetitorFinder(self.config)
-                logger.info(f"[DISCOVER] CompetitorFinder created successfully")
-            except Exception as finder_error:
-                logger.error(f"❌ Failed to create CompetitorFinder: {finder_error}")
-                logger.error(f"❌ Full error: {traceback.format_exc()}")
-                raise
+            logger.info(f"[DISCOVER] Starting discovery for {company_name} ({domain})")
+            logger.info(f"[DISCOVER] Target: {target} competitors")
+            
+            # Create finder
+            logger.info("[DISCOVER] Initializing CompetitorFinder...")
+            finder = CompetitorFinder(self.config)
             
             # Run discovery
-            logger.info(f"[DISCOVER] Calling finder.discover()...")
+            logger.info("[DISCOVER] Running competitor discovery...")
             results = finder.discover(company_data, target=target)
             
             if not results:
-                logger.error("Competitor finder returned no results")
-                return None
+                raise Exception("Discovery returned no results")
             
-            logger.info(f"[SUCCESS] Found {results['statistics']['total_found']} competitors")
+            found = results.get('statistics', {}).get('total_found', 0)
+            logger.info(f"[SUCCESS] ✅ Found {found} competitors")
+            
             return results
             
         except Exception as e:
-            logger.error(f"❌ Error in competitor service: {e}")
-            logger.error(f"❌ Full traceback:\n{traceback.format_exc()}")
-            # Re-raise to see full error in API response
+            logger.error(f"[ERROR] Competitor service failed: {e}")
+            logger.error(traceback.format_exc())
             raise
     
     def _validate_company_data(self, company_data: Dict):
-        """Validate company_data has all required fields"""
-        required_fields = ['domain', 'company']
-        missing = [f for f in required_fields if f not in company_data]
+        """Validate company data structure"""
         
-        if missing:
-            raise ValueError(f"Missing required fields in company_data: {missing}")
+        if not isinstance(company_data, dict):
+            raise ValueError("company_data must be a dictionary")
         
-        company = company_data.get('company', {})
-        required_company_fields = ['name', 'description']
-        missing_company = [f for f in required_company_fields if not company.get(f)]
+        # Check required top-level fields
+        if 'domain' not in company_data:
+            raise ValueError("Missing required field: domain")
         
-        if missing_company:
-            raise ValueError(f"Missing required company fields: {missing_company}")
+        if 'company' not in company_data:
+            raise ValueError("Missing required field: company")
         
-        logger.info("[VALIDATE] ✅ Company data structure is valid")
+        company = company_data['company']
+        
+        if not isinstance(company, dict):
+            raise ValueError("company must be a dictionary")
+        
+        # Check required company fields
+        if 'name' not in company or not company['name']:
+            raise ValueError("Missing or empty company.name")
+        
+        if 'description' not in company or not company['description']:
+            raise ValueError("Missing or empty company.description")
+        
+        # Validate description length
+        if len(company['description']) < 20:
+            logger.warning(f"⚠️ Short description ({len(company['description'])} chars)")
+        
+        logger.info("[VALIDATE] ✅ Company data is valid")
+        logger.info(f"[VALIDATE] Name: {company['name']}")
+        logger.info(f"[VALIDATE] Description: {len(company['description'])} chars")
+        logger.info(f"[VALIDATE] Domain: {company_data['domain']}")
